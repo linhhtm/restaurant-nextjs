@@ -7,11 +7,13 @@ const sliceName = "recipe";
 
 interface RecipeState {
   favoriteList: IRecipe[];
+  listByCategory: {};
   list: IRecipe[];
 }
 
 const initialState: RecipeState = {
   favoriteList: [],
+  listByCategory: {},
   list: [],
 };
 
@@ -27,10 +29,16 @@ const slice = createSlice({
       });
       state.list = payload ?? [];
     },
-    updateFavoriteList: (state, { payload }) => {
+    updateRecipeListByCategory: (state, { payload }) => {
+      state.listByCategory = payload ?? {};
+    },
+    updateFavoriteList: (state, { payload }: { payload: IRecipe }) => {
       const favoriteList = state.favoriteList;
-      const list = state.list;
-      const indexInList = list?.findIndex((el) => el.idMeal === payload.idMeal);
+      const listByCategory = JSON.parse(JSON.stringify(state.listByCategory));
+      const list = listByCategory[payload.strCategory];
+      const indexInList = list?.findIndex(
+        (el: IRecipe) => el.idMeal === payload.idMeal
+      );
       const index = favoriteList.findIndex(
         (el) => el.idMeal === payload.idMeal
       );
@@ -41,13 +49,20 @@ const slice = createSlice({
         favoriteList.push({ ...payload, liked: true });
         if (indexInList > -1) list[indexInList].liked = true;
       }
+      state.listByCategory = listByCategory;
     },
   },
 });
 export const getFavoriteList = (state: any) => state[sliceName].favoriteList;
+export const getRecipeListByCategory = (state: any) =>
+  state[sliceName].listByCategory;
 export const getRecipeList = (state: any) => state[sliceName].list;
 
-export const { updateFavoriteList, updateRecipeList } = slice.actions;
+export const {
+  updateFavoriteList,
+  updateRecipeList,
+  updateRecipeListByCategory,
+} = slice.actions;
 
 const persistConfig = {
   key: sliceName,

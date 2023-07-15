@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useLayoutEffect, useState } from "react";
 import {
   TwoColumnWithVideo,
   ThreeColSimple,
@@ -8,15 +9,49 @@ import {
 } from "components";
 import API from "service";
 import clsx from "clsx";
+import { useAppDispatch } from "store/hook";
+import { updateRecipeListByCategory } from "store/slice";
+import { IRecipe } from "types";
 
 const Subheading = `tracking-wider text-sm font-medium`;
 const HighlightedText = `bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 const imageCss = `rounded-4xl`;
 
-const App = async () => {
-  const data = await API.getRecipeList();
-  const popularPosts = await API.getBlogPopular({ size: 2 });
-  const recentPosts = await API.getBlogRecent({ size: 5 });
+const App = () => {
+  const dispatch = useAppDispatch();
+  const [post, setPost] = useState({
+    popularPosts: [],
+    recentPosts: [],
+  });
+
+  useLayoutEffect(() => {
+    (async () => {
+      Promise.all([
+        API.getBlogPopular({ size: 2 }),
+        API.getBlogRecent({ size: 5 }),
+      ]).then((values) => {
+        setPost({
+          popularPosts: values[0],
+          recentPosts: values[1],
+        });
+      });
+
+      const res = await API.getRecipeList();
+      const data = res.meals;
+      const obj = {};
+      if (data?.length) {
+        data.forEach((el: IRecipe) => {
+          const key = el.strCategory as keyof typeof obj;
+          const array: IRecipe[] = obj[key] || [];
+          array.push(el);
+          Object.assign(obj, {
+            [key]: array,
+          });
+        });
+      }
+      dispatch(updateRecipeListByCategory(obj));
+    })();
+  }, []);
 
   return (
     <div>
@@ -35,7 +70,6 @@ const App = async () => {
         watchVideoButtonText="Meet The Chefs"
       />
       <TabCardGrid
-        data={data.meals}
         heading={
           <>
             Checkout <span className={HighlightedText}>recipes.</span>
@@ -103,8 +137,8 @@ const App = async () => {
         textOnLeft={true}
       />
       <PopularAndRecentBlogPosts
-        recentPosts={recentPosts}
-        popularPosts={popularPosts}
+        recentPosts={post.recentPosts}
+        popularPosts={post.popularPosts}
       />
     </div>
   );
