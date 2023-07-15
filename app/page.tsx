@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   TwoColumnWithVideo,
   ThreeColSimple,
@@ -8,20 +7,17 @@ import {
   PopularAndRecentBlogPosts,
 } from "components";
 import API from "service";
-import { getRecipeList, updateRecipeList } from "store/slice/recipe.slice";
-import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 
 const Subheading = `tracking-wider text-sm font-medium`;
 const HighlightedText = `bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 const imageCss = `rounded-4xl`;
 
-const App = ({ data, recentPosts, popularPosts }: any) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(updateRecipeList(data));
-  }, [data]);
-  const list = useSelector(getRecipeList);
+const App = async () => {
+  const data = await API.getRecipeList();
+  const popularPosts = await API.getBlogPopular({ size: 2 });
+  const recentPosts = await API.getBlogRecent({ size: 5 });
+
   return (
     <div>
       <TwoColumnWithVideo
@@ -39,7 +35,7 @@ const App = ({ data, recentPosts, popularPosts }: any) => {
         watchVideoButtonText="Meet The Chefs"
       />
       <TabCardGrid
-        data={list}
+        data={data.meals}
         heading={
           <>
             Checkout <span className={HighlightedText}>recipes.</span>
@@ -72,8 +68,8 @@ const App = ({ data, recentPosts, popularPosts }: any) => {
             url: "https://reddit.com",
           },
         ]}
-        imageContainerCss={`p-2!`}
-        imageCss={`w-20! h-20!`}
+        imageContainerCss={`!p-2`}
+        imageCss={`!w-20 !h-20`}
       />
       <TwoColSingleFeatureWithStats2
         subheading={<span className={Subheading}>A Reputed Brand</span>}
@@ -114,17 +110,3 @@ const App = ({ data, recentPosts, popularPosts }: any) => {
   );
 };
 export default App;
-
-export async function getStaticProps() {
-  const data = await API.getRecipeList();
-  const popularPosts = await API.getBlogPopular({ size: 2 });
-  const recentPosts = await API.getBlogRecent({ size: 5 });
-
-  return {
-    props: {
-      data: data?.meals,
-      recentPosts,
-      popularPosts,
-    },
-  };
-}

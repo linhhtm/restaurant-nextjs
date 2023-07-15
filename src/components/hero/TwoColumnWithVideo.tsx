@@ -7,6 +7,7 @@ import SvgDecoratorBlob2 from "images/dot-pattern.svg";
 import DesignIllustration from "images/design-illustration.svg";
 import { ITwoColumnWithVideo } from "types";
 import { Container } from "components";
+import Image from "next/image";
 
 const TwoColumn = `flex flex-col lg:flex-row md:items-center max-w-screen-xl mx-auto py-20 md:py-24`;
 const LeftColumn = `relative lg:w-6/12 lg:pr-12 flex-shrink-0 text-center lg:text-left`;
@@ -24,11 +25,10 @@ const TwoColumnWithVideo = ({
   heading = "Modern React Templates, Just For You",
   description = "Our templates are easy to setup, understand and customize. Fully modular components with a variety of pages and components.",
   primaryButtonText = "Get Started",
-  primaryButtonUrl = "#",
   watchVideoButtonText = "Watch Video",
   watchVideoYoutubeUrl = "https://www.youtube.com/embed/_GuOjXYl5ew",
   imageSrc = DesignIllustration,
-  imageCss = null,
+  imageCss = undefined,
   imageDecoratorBlob = false,
 }: ITwoColumnWithVideo) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -42,9 +42,7 @@ const TwoColumnWithVideo = ({
             <h1 className={Heading}>{heading}</h1>
             <div className={Paragraph}>{description}</div>
             <div className={Actions}>
-              <button className={PrimaryButton} as="a" href={primaryButtonUrl}>
-                {primaryButtonText}
-              </button>
+              <button className={PrimaryButton}>{primaryButtonText}</button>
               <button className={WatchVideoButton} onClick={toggleModal}>
                 <span>
                   <PlayIcon className="stroke-1" />
@@ -55,7 +53,15 @@ const TwoColumnWithVideo = ({
           </div>
           <div className={RightColumn}>
             <div className={IllustrationContainer}>
-              <img className={imageCss} src={imageSrc} alt="Hero" />
+              <Image
+                className={imageCss}
+                src={imageSrc}
+                alt="Hero"
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "100%", height: "auto" }} // optional
+              />
               {imageDecoratorBlob && (
                 <SvgDecoratorBlob2 className="pointer-events-none fill-current text-primary-500 opacity-25 absolute w-32 h-32 right-0 bottom-0 transform translate-x-10 translate-y-10 -z-10" />
               )}

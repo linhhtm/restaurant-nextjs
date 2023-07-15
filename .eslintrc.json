@@ -1,3 +1,15 @@
 {
-  "extends": "next/core-web-vitals"
+  "plugins": ["prettier", "@typescript-eslint"],
+  "extends": ["next/core-web-vitals", "eslint:recommended"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  },
+  "rules": {
+    "max-len": "off",
+    "react-hooks/exhaustive-deps": "off"
+  }
 }

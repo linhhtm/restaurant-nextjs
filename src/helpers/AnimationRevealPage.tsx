@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useInView, motion } from "helpers";
+import { useInView, MotionSection } from "helpers";
 import { IAnimatedSlideInComponent, IAnimationReveal } from "types";
 
 const StyledDiv = `font-display min-h-screen text-secondary-500 p-8 overflow-hidden`;
@@ -11,7 +11,7 @@ const AnimatedSlideInComponent = ({ children }: IAnimatedSlideInComponent) => {
 
   return (
     <div ref={ref}>
-      <motion.section
+      <MotionSection
         initial={{ x: x.initial }}
         animate={{
           x: inView && x.target,
@@ -22,7 +22,7 @@ const AnimatedSlideInComponent = ({ children }: IAnimatedSlideInComponent) => {
         transition={{ type: "spring", damping: 19 }}
       >
         {children}
-      </motion.section>
+      </MotionSection>
     </div>
   );
 };

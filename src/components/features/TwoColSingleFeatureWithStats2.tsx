@@ -77,7 +77,7 @@ const TwoColSingleFeatureWithStats2 = ({
           {imageInsideDiv ? (
             <div
               className={`${Image} ${imageCss}`}
-              style={{ backgroundImage: `url(${imageSrc})` }}
+              style={{ backgroundImage: `url("${imageSrc}")` }}
             />
           ) : (
             <img src={imageSrc} alt="" />

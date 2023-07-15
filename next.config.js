@@ -3,6 +3,9 @@ const nextConfig = {
   future: {
     webpack5: true,
   },
+  images: {
+    domains: ["images.unsplash.com"],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

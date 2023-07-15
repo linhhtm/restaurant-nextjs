@@ -1,31 +1,45 @@
-/* A simple iframe wrapper that makes 16:9 responsive embed */
-import React from 'react';
-import { IResponsiveVideoEmbed } from 'types';
+'use client'
+import React, { useState } from 'react'
+import { Spinner } from 'components'
+import { IResponsiveVideoEmbed } from 'types'
 
-export default ({ url, background="black", className="video" }: IResponsiveVideoEmbed) => {
+const ResponsiveVideoEmbed = ({
+  url,
+  background = 'black',
+  className = 'video'
+}: IResponsiveVideoEmbed) => {
+  const [loading, setLoading] = useState(true)
+  function onLoad() {
+    setLoading(false)
+  }
+
   return (
-    <div
-      className={className}
-      style={{
-        position: "relative",
-        background: background,
-        paddingBottom: "56.25%" /* 16:9 */,
-        paddingTop: 25,
-        height: 0
-      }}
-    >
-      <iframe
-        title="Embeded Video"
+    <>
+      {loading && <Spinner />}
+      <div
+        className={className}
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%"
+          background: background,
+          paddingBottom: '56.25%' /* 16:9 */,
+          paddingTop: 25,
+          height: 0
         }}
-        src={url}
-        frameBorder="0"
-      />
-    </div>
-  );
-};
+      >
+        <iframe
+          onLoad={onLoad}
+          title="Embeded Video"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%'
+          }}
+          src={url}
+        />
+      </div>
+    </>
+  )
+}
+
+export default ResponsiveVideoEmbed

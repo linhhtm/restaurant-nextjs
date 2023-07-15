@@ -14,7 +14,7 @@ const ReactModalAdapter = ({ show, onClose, children, title }: any) => {
     <>
       <div className="ReactModalAdapter fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4">
         <div className="w-full relative">
-          <div className="height[600px] overflow-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+          <div className="h-[600px] overflow-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             <div className="flex items-start justify-between px-5 py-2 border-b border-solid border-gray-300 rounded-t ">
               <h3 className="text-xl">{title}</h3>
               <button

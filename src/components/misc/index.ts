@@ -1,5 +1,6 @@
-export * from "./Buttons";
-export * from "./Headings";
-export * from "./Layouts";
-export * from "./Links";
-export * from "./Typography";
+export * from './Buttons'
+export * from './Headings'
+export * from './Layouts'
+export * from './Links'
+export * from './Typography'
+export { default as Spinner } from './Spinner'
