@@ -33,12 +33,9 @@ const ThreeColSimpleWithImage = ({ data }: any) => {
           {data?.map((post: IPost, index: number) => (
             <div className={Column} key={index}>
               <div className={Card}>
-                <Image
-                  alt=""
-                  layout="fill"
-                  className="bg-cover bg-center h-80 lg:h-64 rounded"
-                  src={post.imageSrc}
-                />
+                <div className="relative bg-cover bg-center h-80 lg:h-64 rounded">
+                  <Image alt="" layout="fill" src={post.imageSrc} />
+                </div>
                 <div className={Category}>{post.category}</div>
                 <div className={Title}>{post.title}</div>
                 <NextLink className={Link} href={`/posts/${post.id}`}>

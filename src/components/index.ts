@@ -5,3 +5,4 @@ export * from "./blogs";
 export * from "./cards";
 export * from "./hero";
 export * from "./features";
+export * from "./testimonials";

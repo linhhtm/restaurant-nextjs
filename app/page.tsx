@@ -9,8 +9,11 @@ import {
 } from "components";
 import API from "service";
 import clsx from "clsx";
-import { useAppDispatch } from "store/hook";
-import { updateRecipeListByCategory } from "store/slice";
+import { useAppDispatch, useAppSelector } from "store/hook";
+import {
+  getRecipeListByCategory,
+  updateRecipeListByCategory,
+} from "store/slice";
 import { IRecipe } from "types";
 
 const Subheading = `tracking-wider text-sm font-medium`;
@@ -23,7 +26,7 @@ const App = () => {
     popularPosts: [],
     recentPosts: [],
   });
-
+  const tabs = useAppSelector(getRecipeListByCategory);
   useLayoutEffect(() => {
     (async () => {
       Promise.all([
@@ -70,6 +73,7 @@ const App = () => {
         watchVideoButtonText="Meet The Chefs"
       />
       <TabCardGrid
+        tabs={tabs}
         heading={
           <>
             Checkout <span className={HighlightedText}>recipes.</span>

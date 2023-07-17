@@ -1,6 +1,6 @@
-import { ReactNode } from "react"
-import { IRecipe } from "types"
+import { ReactNode } from "react";
+import { IRecipe } from "types";
 export interface ITabCardGrid {
-    heading: string | ReactNode
-    data?: IRecipe[]
+  heading: string | ReactNode;
+  tabs: Record<string, IRecipe[]>;
 }

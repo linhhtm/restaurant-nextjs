@@ -7,8 +7,6 @@ import SvgDecoratorBlob2 from "images/svg-decorator-blob-7.svg";
 import { IRecipe, ITabCardGrid } from "types";
 import CardRecipe from "./CardRecipe";
 import clsx from "clsx";
-import { useAppSelector } from "store/hook";
-import { getRecipeListByCategory } from "store/slice";
 
 const HeaderRow = `flex justify-between items-center flex-col xl:flex-row`;
 const TabsControl = `flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
@@ -16,8 +14,7 @@ const TabControl = `cursor-pointer px-6 py-3 mt-2 sm:mt-0 sm:mr-2 last:mr-0 text
   hover:bg-gray-300 hover:text-gray-700`;
 const TabContent = `mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
 
-const TabCardGrid = ({ heading }: ITabCardGrid) => {
-  const tabs = useAppSelector(getRecipeListByCategory);
+const TabCardGrid = ({ heading, tabs }: ITabCardGrid) => {
   const tabsKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = useState("");
   useEffect(() => {

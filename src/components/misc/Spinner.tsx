@@ -1,6 +1,6 @@
 const Spinner = () => {
   return (
-    <div className="text-center w-full h-full">
+    <div className="text-center w-full h-full my-5">
       <div role="status">
         <svg
           aria-hidden="true"
@@ -21,7 +21,7 @@ const Spinner = () => {
         <span className="sr-only">Loading...</span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

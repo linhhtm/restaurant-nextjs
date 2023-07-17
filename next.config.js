@@ -4,7 +4,12 @@ const nextConfig = {
     webpack5: true,
   },
   images: {
-    domains: ["images.unsplash.com"],
+    domains: [
+      "images.unsplash.com",
+      "www.themealdb.com",
+      "gl.amthuc365.vn",
+      "www.simplyrecipes.com",
+    ],
   },
   webpack(config) {
     config.module.rules.push({

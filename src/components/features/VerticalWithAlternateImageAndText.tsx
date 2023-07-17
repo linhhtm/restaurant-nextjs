@@ -41,12 +41,9 @@ const VerticalWithAlternateImageAndText = ({ data, posts }: any) => {
         </div>
 
         <div className={Card}>
-          <Image
-            layout="fill"
-            className="rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8"
-            src={strMealThumb}
-            alt=""
-          />
+          <div className="relative rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8">
+            <Image layout="fill" objectFit="cover" src={strMealThumb} alt="" />
+          </div>
         </div>
         <div className={HeadingInfoContainer}>
           <div className={HeadingTitle}>Ingredients</div>
