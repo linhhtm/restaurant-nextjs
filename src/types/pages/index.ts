@@ -67,10 +67,11 @@ export interface IAuthor {
 }
 export interface IPost {
   imageSrc: string;
-  title?: string;
+  title: string;
   category?: string;
-  id?: number;
+  id: number | string;
   description?: string;
   author: IAuthor;
   date?: string;
+  featured?: boolean;
 }

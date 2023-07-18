@@ -30,7 +30,7 @@ const TwoColSignleFeatureWithStats = ({
     },
   ];
 
-  return (
+  return data ? (
     <div className={Container}>
       <div className={`${Column} ${TwoColumn}`}>
         <div className={`${Column} ${ImageColumn}`}>
@@ -63,6 +63,8 @@ const TwoColSignleFeatureWithStats = ({
       </div>
       <ThreeColSimpleWithImage data={posts} />
     </div>
+  ) : (
+    <div></div>
   );
 };
 
