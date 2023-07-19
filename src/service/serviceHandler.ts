@@ -1,15 +1,15 @@
-const serviceHandler = async (service: any) => {
+const serviceHandler = async (service: string, init?: any) => {
   try {
-    const res = await fetch(service)
+    const res = await fetch(service, init);
     if (!res.ok) {
-      return
+      return;
     } else {
-      const data = await res.json()
-      return data
+      const data = await res.json();
+      return data;
     }
   } catch (err) {
-    console.log(err)
-    return err
+    console.log(err);
+    return err;
   }
-}
-export default serviceHandler
+};
+export default serviceHandler;

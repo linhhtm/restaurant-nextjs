@@ -17,8 +17,10 @@ const API = {
     );
     return data;
   },
-  getBlogList: async () => {
-    const data = await serviceHandler(`http://localhost:3000/api/posts`);
+  getBlogList: async (req: any) => {
+    const data = await serviceHandler(
+      `http://localhost:3000/api/posts?${new URLSearchParams(req)}`
+    );
     return data;
   },
   getBlogDetail: async (id: IPost["id"]) => {

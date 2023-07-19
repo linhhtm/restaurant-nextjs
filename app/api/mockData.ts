@@ -205,4 +205,21 @@ export const posts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
+  {
+    imageSrc:
+      "https://www.simplyrecipes.com/thmb/F81_sM2H1giqwPIpaj2c4VN0gDs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Pizza-Casserole-LEAD-4-384048a7cf0c42df95409aef7adfbd55.jpg",
+    category: "Holiday & Seasons",
+    title: "Soup",
+    id: 13,
+    views: 20,
+    date: "April 21, 2020",
+    author: {
+      imageSrc:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
+      name: "Charlotte Delos",
+      profile: "Chef",
+    },
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
 ];

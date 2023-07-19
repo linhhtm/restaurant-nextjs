@@ -42,17 +42,33 @@ const Description = ``;
 const ButtonContainer = `flex justify-center`;
 const LoadMoreButton = `mt-16 mx-auto`;
 
+interface IPostList {
+  data: IPost[];
+  page: number;
+  lastPage: number;
+}
 const PostList = ({ headingText = "Blog Posts" }: any) => {
-  const [visible, setVisible] = useState(7);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<IPostList>({
+    data: [],
+    page: 0,
+    lastPage: 0,
+  });
   const onLoadMoreClick = () => {
-    setVisible((v) => v + 6);
+    fetchBlogList(data.page + 1);
+  };
+
+  const fetchBlogList = async (page: number) => {
+    const res = await API.getBlogList({ page });
+    setData({
+      data: [...data.data, ...(res.data || [])],
+      page,
+      lastPage: res.lastPage,
+    });
   };
 
   useEffect(() => {
     (async () => {
-      const res = await API.getBlogList();
-      setData(res || []);
+      await fetchBlogList(data.page);
     })();
   }, []);
 
@@ -63,7 +79,7 @@ const PostList = ({ headingText = "Blog Posts" }: any) => {
           <div className={`${SectionHeading} ${Heading}`}>{headingText}</div>
         </div>
         <div className={Posts}>
-          {data?.slice(0, visible).map((post: IPost, index: number) => (
+          {data.data?.map((post: IPost, index: number) => (
             <div
               className={clsx(PostContainer, {
                 group: post.featured,
@@ -78,6 +94,7 @@ const PostList = ({ headingText = "Blog Posts" }: any) => {
                     <NextImage
                       alt={post.title}
                       layout="fill"
+                      sizes="md"
                       src={post.imageSrc}
                     />
                   </div>
@@ -94,7 +111,7 @@ const PostList = ({ headingText = "Blog Posts" }: any) => {
             </div>
           ))}
         </div>
-        {visible < data.length && (
+        {data.page < data.lastPage && (
           <div className={ButtonContainer}>
             <button
               className={`${PrimaryButton} ${LoadMoreButton}`}

@@ -15,7 +15,7 @@ const TabControl = `cursor-pointer px-6 py-3 mt-2 sm:mt-0 sm:mr-2 last:mr-0 text
 const TabContent = `mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
 
 const TabCardGrid = ({ heading, tabs }: ITabCardGrid) => {
-  const tabsKeys = Object.keys(tabs);
+  const tabsKeys = Object.keys(tabs || {});
   const [activeTab, setActiveTab] = useState("");
   useEffect(() => {
     if (activeTab === "" && Object.keys(tabs).length) setActiveTab(tabsKeys[0]);
