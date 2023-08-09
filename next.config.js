@@ -1,10 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  presets: [require.resolve("next/babel")],
-  plugins: [[require.resolve("babel-plugin-macros")]],
-  future: {
-    webpack5: true,
-  },
   images: {
     domains: [
       "images.unsplash.com",

@@ -67,7 +67,7 @@
   },
   "babelMacros": {
     "twin": {
-      "preset": "styled-components"
+      "preset": "emotion"
     }
   }
 }

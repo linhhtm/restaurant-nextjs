@@ -1,5 +1,5 @@
+"use client";
 import "./globals.css";
-import { Inter } from "next/font/google";
 import GlobalStyles from "styles/GlobalStyles";
 import { Providers } from "store/provider";
 import { AnimationRevealPage } from "helpers";
@@ -7,8 +7,6 @@ import { SimpleSubscribeNewsletter, Header, Footer } from "components";
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Restaurant",
@@ -20,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en">
       <body>
         <Providers>
           <ToastContainer />
