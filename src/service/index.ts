@@ -9,37 +9,37 @@ const API = {
         search ? `s=${search}` : `f=b`
       }`
     );
-    return data;
+    return data.status ? {} : data;
   },
   getRecipeDetail: async (id: IRecipe["idMeal"]) => {
     const data = await serviceHandler(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     );
-    return data;
+    return data.status ? {} : data;
   },
   getBlogList: async (req: any) => {
     const data = await serviceHandler(
-      `http://localhost:3000/api/posts?${new URLSearchParams(req)}`
+      `http://localhost:8080/api/posts?${new URLSearchParams(req)}`
     );
-    return data;
+    return data.status ? [] : data;
   },
   getBlogDetail: async (id: IPost["id"]) => {
-    const data = await serviceHandler(`http://localhost:3000/api/posts/${id}`);
-    return data;
+    const data = await serviceHandler(`http://localhost:8080/api/posts/${id}`);
+    return data.status ? {} : data;
   },
   getBlogPopular: async (props?: IPaginate) => {
     const { size } = props ?? {};
     const data = await serviceHandler(
-      `http://localhost:3000/api/posts/popular?size=${size}`
+      `http://localhost:8080/api/posts/popular?size=${size}`
     );
-    return data;
+    return data.status ? [] : data;
   },
   getBlogRecent: async (props?: IPaginate) => {
     const { size } = props ?? {};
     const data = await serviceHandler(
-      `http://localhost:3000/api/posts/recent?size=${size}`
+      `http://localhost:8080/api/posts/recent?size=${size}`
     );
-    return data;
+    return data.status ? [] : data;
   },
 };
 

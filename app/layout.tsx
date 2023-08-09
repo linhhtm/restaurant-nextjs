@@ -4,6 +4,9 @@ import GlobalStyles from "styles/GlobalStyles";
 import { Providers } from "store/provider";
 import { AnimationRevealPage } from "helpers";
 import { SimpleSubscribeNewsletter, Header, Footer } from "components";
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +23,7 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body>
         <Providers>
+          <ToastContainer />
           <AnimationRevealPage>
             <GlobalStyles />
             <Header />

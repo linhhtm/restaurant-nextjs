@@ -15,7 +15,7 @@ const Content = ``;
 const Card = `mb-10 mt-24 md:flex justify-center items-center flex-row`;
 const Subtitle = `flex items-center text-gray-900 tracking-wide`;
 
-const VerticalWithAlternateImageAndText = ({ data, posts }: any) => {
+const VerticalWithAlternateImageAndText = ({ data = {}, posts }: any) => {
   const { strMeal, strInstructions, strMealThumb } = data;
 
   const ingredients = useMemo(() => {
@@ -42,7 +42,14 @@ const VerticalWithAlternateImageAndText = ({ data, posts }: any) => {
 
         <div className={Card}>
           <div className="relative rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8">
-            <Image layout="fill" objectFit="cover" src={strMealThumb} alt="" />
+            {strMealThumb && (
+              <Image
+                layout="fill"
+                objectFit="cover"
+                src={strMealThumb}
+                alt=""
+              />
+            )}
           </div>
         </div>
         <div className={HeadingInfoContainer}>

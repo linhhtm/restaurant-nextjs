@@ -1,18 +1,18 @@
 import { IRecipe } from "types";
 import { createSlice } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
 
 const sliceName = "recipe";
 
 interface RecipeState {
   favoriteList: IRecipe[];
+  favoriteListObj: Record<IRecipe["idMeal"], IRecipe>;
   listByCategory: {};
   list: IRecipe[];
 }
 
 const initialState: RecipeState = {
   favoriteList: [],
+  favoriteListObj: {},
   listByCategory: {},
   list: [],
 };
@@ -23,9 +23,7 @@ const slice = createSlice({
   reducers: {
     updateRecipeList: (state, { payload }) => {
       payload?.forEach((el: IRecipe) => {
-        if (state.favoriteList.find((fav) => fav.idMeal === el.idMeal)) {
-          el.liked = true;
-        }
+        el.liked = !!state.favoriteListObj[el.idMeal];
       });
       state.list = payload ?? [];
     },
@@ -34,6 +32,9 @@ const slice = createSlice({
     },
     updateFavoriteList: (state, { payload }: { payload: IRecipe }) => {
       const favoriteList = state.favoriteList;
+      const favoriteListObj = JSON.parse(
+        JSON.stringify(state.favoriteListObj || {})
+      );
       const listByCategory = JSON.parse(JSON.stringify(state.listByCategory));
       const list = listByCategory[payload.strCategory];
       const indexInList = list?.findIndex(
@@ -45,28 +46,27 @@ const slice = createSlice({
       if (payload.liked) {
         favoriteList.splice(index, 1);
         if (indexInList > -1) list[indexInList].liked = false;
+        favoriteListObj.delete(payload.idMeal);
       } else {
         favoriteList.push({ ...payload, liked: true });
         if (indexInList > -1) list[indexInList].liked = true;
+        favoriteListObj[payload.idMeal] = payload;
       }
+      state.favoriteListObj = favoriteListObj;
       state.listByCategory = listByCategory;
     },
   },
 });
 export const getFavoriteList = (state: any) => state[sliceName].favoriteList;
+export const getFavoriteListObj = (state: any) =>
+  state[sliceName].favoriteListObj;
 export const getRecipeListByCategory = (state: any) =>
   state[sliceName].listByCategory;
 export const getRecipeList = (state: any) => state[sliceName].list;
-
 export const {
   updateFavoriteList,
   updateRecipeList,
   updateRecipeListByCategory,
 } = slice.actions;
 
-const persistConfig = {
-  key: sliceName,
-  storage: storage,
-};
-
-export default persistReducer(persistConfig, slice.reducer);
+export default slice.reducer;

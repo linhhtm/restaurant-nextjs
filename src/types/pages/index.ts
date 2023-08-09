@@ -5,7 +5,7 @@ export interface IIngredient {
 
 export interface IRecipe {
   liked?: boolean;
-  idMeal?: string;
+  idMeal: string;
   strMeal?: string;
   strDrinkAlternate?: null | string;
   strCategory: string;

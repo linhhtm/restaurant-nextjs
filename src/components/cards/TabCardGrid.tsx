@@ -1,12 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { MotionDiv } from "helpers";
-import { Container, ContentWithPaddingXl, SectionHeading } from "components";
+import {
+  Container,
+  ContentWithPaddingXl,
+  PrimaryButton,
+  SectionHeading,
+} from "components";
 import SvgDecoratorBlob1 from "images/svg-decorator-blob-5.svg";
 import SvgDecoratorBlob2 from "images/svg-decorator-blob-7.svg";
 import { IRecipe, ITabCardGrid } from "types";
 import CardRecipe from "./CardRecipe";
 import clsx from "clsx";
+import EmailNewsletterIconBase from "images/email-newsletter-icon.svg";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const HeaderRow = `flex justify-between items-center flex-col xl:flex-row`;
 const TabsControl = `flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
@@ -16,31 +23,66 @@ const TabContent = `mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
 
 const TabCardGrid = ({ heading, tabs }: ITabCardGrid) => {
   const tabsKeys = Object.keys(tabs || {});
+  const router = useRouter();
+  const search = useSearchParams();
+  const s = search.get("s");
+  const isEmpty = tabsKeys.length === 0;
+  const [flag, setFlag] = useState(false);
   const [activeTab, setActiveTab] = useState("");
+
   useEffect(() => {
-    if (activeTab === "" && Object.keys(tabs).length) setActiveTab(tabsKeys[0]);
+    if (Object.keys(tabs).length) setActiveTab(tabsKeys[0]);
+  }, []);
+
+  useEffect(() => {
+    if (!flag) {
+      const tabsKeys = Object.keys(tabs || {});
+      setActiveTab(tabsKeys[0]);
+      setFlag(true);
+    }
   }, [tabs]);
+
+  useEffect(() => {
+    setFlag(false);
+  }, [s]);
 
   return (
     <div className={Container}>
       <div className={ContentWithPaddingXl}>
-        <div className={HeaderRow}>
-          <div className={SectionHeading}>{heading}</div>
-          <div className={TabsControl}>
-            {Object.keys(tabs).map((tabName) => (
-              <div
-                className={clsx(TabControl, {
-                  "!bg-primary-500 !text-gray-100": activeTab === tabName,
-                })}
-                key={tabName}
-                onClick={() => setActiveTab(tabName)}
+        {isEmpty ? (
+          <div>
+            <div className={clsx(SectionHeading, "!text-left")}>{heading}</div>
+            <div className="flex items-center flex-col mt-10">
+              <EmailNewsletterIconBase className="w-40 h-40" />
+              <b className="text-xl mb-5">
+                The products you were looking for was not found
+              </b>
+              <button
+                className={PrimaryButton}
+                onClick={() => router.push("/")}
               >
-                {tabName}
-              </div>
-            ))}
+                Home
+              </button>
+            </div>
           </div>
-        </div>
-
+        ) : (
+          <div className={HeaderRow}>
+            <div className={SectionHeading}>{heading}</div>
+            <div className={TabsControl}>
+              {Object.keys(tabs).map((tabName) => (
+                <div
+                  className={clsx(TabControl, {
+                    "!bg-primary-500 !text-gray-100": activeTab === tabName,
+                  })}
+                  key={tabName}
+                  onClick={() => setActiveTab(tabName)}
+                >
+                  {tabName}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         {tabsKeys.map((tabKey, index) => (
           <MotionDiv
             className={TabContent}

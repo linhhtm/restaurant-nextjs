@@ -11,6 +11,7 @@ import API from "service";
 import clsx from "clsx";
 import { useAppDispatch, useAppSelector } from "store/hook";
 import {
+  getFavoriteListObj,
   getRecipeListByCategory,
   updateRecipeListByCategory,
 } from "store/slice";
@@ -27,6 +28,8 @@ const App = () => {
     recentPosts: [],
   });
   const tabs = useAppSelector(getRecipeListByCategory);
+  const listFavoriteObj = useAppSelector(getFavoriteListObj);
+
   useLayoutEffect(() => {
     (async () => {
       Promise.all([
@@ -46,7 +49,7 @@ const App = () => {
         data.forEach((el: IRecipe) => {
           const key = el.strCategory as keyof typeof obj;
           const array: IRecipe[] = obj[key] || [];
-          array.push(el);
+          array.push({ ...el, liked: !!listFavoriteObj[el.idMeal] });
           Object.assign(obj, {
             [key]: array,
           });

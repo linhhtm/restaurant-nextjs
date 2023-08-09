@@ -5,8 +5,8 @@ import Image from "next/legacy/image";
 
 const TwoColumn = `flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
 const Column = `w-full max-w-md mx-auto md:max-w-none md:mx-0`;
-const ImageColumn = `md:w-6/12 lg:w-5/12 flex-shrink-0 h-80 md:h-auto`;
-const TextColumn = `md:w-6/12 mt-8 md:mt-0`;
+const ImageColumn = `md:mr-5 md:w-6/12 lg:w-5/12 flex-shrink-0 h-80 md:h-auto`;
+const TextColumn = `lg:w-full md:w-6/12 mt-8 md:mt-0 md:!mx-0`;
 const TextContent = `lg:py-8`;
 
 const Heading = `text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
@@ -30,19 +30,16 @@ const TwoColSignleFeatureWithStats = ({
     },
   ];
 
-  return data ? (
+  return (
     <div className={Container}>
-      <div className={`${Column} ${TwoColumn}`}>
+      <div className={TwoColumn}>
         <div className={`${Column} ${ImageColumn}`}>
-          <Image
-            className="rounded bg-cover bg-center h-full"
-            layout="fill"
-            alt=""
-            src={imageSrc}
-          />
+          <div className="relative rounded h-full">
+            <Image layout="fill" alt="" src={imageSrc} />
+          </div>
         </div>
         <div
-          className={clsx(TextColumn, {
+          className={clsx(Column, TextColumn, {
             "md:mr-8 lg:mr-16 md:order-first": textOnLeft,
             "md:ml-8 lg:ml-16 md:order-last": !textOnLeft,
           })}
@@ -63,8 +60,6 @@ const TwoColSignleFeatureWithStats = ({
       </div>
       <ThreeColSimpleWithImage data={posts} />
     </div>
-  ) : (
-    <div></div>
   );
 };
 

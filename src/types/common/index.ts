@@ -1,4 +1,4 @@
 export interface IPaginate {
   size?: number;
-  search?: string;
+  search?: string | null;
 }

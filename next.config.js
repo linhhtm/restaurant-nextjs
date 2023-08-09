@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  presets: [require.resolve("next/babel")],
+  plugins: [[require.resolve("babel-plugin-macros")]],
   future: {
     webpack5: true,
   },
@@ -17,6 +19,18 @@ const nextConfig = {
       use: ["@svgr/webpack"],
     });
     return config;
+  },
+  compiler: {
+    // Enables the styled-components SWC transform
+    styledComponents: true,
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/search",
+        destination: "/recipes",
+      },
+    ];
   },
 };
 
