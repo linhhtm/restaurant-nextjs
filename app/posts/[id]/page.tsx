@@ -1,3 +1,4 @@
+'use client'
 import { TwoColSingleFeatureWithStats } from "components";
 import API from "service";
 import { IPost } from "types";

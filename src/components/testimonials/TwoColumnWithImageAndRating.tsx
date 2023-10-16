@@ -1,4 +1,3 @@
-"use client";
 import "slick-carousel/slick/slick.css";
 import React, { useState } from "react";
 import Slider from "react-slick";
@@ -69,8 +68,8 @@ const TwoColumnWithImageAndRating = ({
   const [sliderRef, setSliderRef] = useState<any>(null);
 
   return (
-    <div className={Container}>
-      <div className={ContentWithPaddingXl}>
+    <Container>
+      <ContentWithPaddingXl>
         <div className={Row}>
           <div className={`${Column} ${ImageColumn}`}>
             <Image
@@ -96,7 +95,7 @@ const TwoColumnWithImageAndRating = ({
               "md:pl-12 lg:pl-16 md:order-last": !textOnLeft,
             })}
           >
-            <div className={`${SectionHeading} ${Heading}`}>{heading}</div>
+            <SectionHeading className={Heading}>{heading}</SectionHeading>
             <p className={Description}>{description}</p>
             <Slider
               className={TestimonialSlider}
@@ -138,8 +137,8 @@ const TwoColumnWithImageAndRating = ({
             </Slider>
           </div>
         </div>
-      </div>
-    </div>
+      </ContentWithPaddingXl>
+    </Container>
   );
 };
 

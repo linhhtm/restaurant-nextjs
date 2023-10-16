@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useRef, useState } from "react";
 import { ReactModalAdapter, useAnimatedNavToggler, MotionDiv } from "helpers";
 import MenuIcon from "feather-icons/dist/icons/menu.svg";
@@ -10,8 +8,9 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import HeartIcon from "feather-icons/dist/icons/heart.svg";
 import { useSelector } from "react-redux";
 import { getFavoriteList } from "store/slice/recipe.slice";
-import { CardRecipe, PrimaryButton } from "components";
+import { CardRecipe } from "components/cards";
 import clsx from "clsx";
+import tw from "twin.macro";
 
 const collapseBreakPointCssMap = {
   sm: {
@@ -41,29 +40,30 @@ const HeaderStyle = `
   max-w-screen-xl mx-auto
   my-3
 `;
-export const NavLinks = `inline-block`;
-export const NavLink = `cursor-pointer
+const NavLinks = `inline-block`;
+const NavLink = `cursor-pointer
   text-lg my-2 lg:text-sm lg:mx-6 lg:my-0
   font-semibold tracking-wide transition duration-300
   pb-1 border-b-2 border-transparent hover:border-primary-500 hocus:text-primary-500`;
 
-export const LogoLink = `cursor-pointer
+const LogoLink = `cursor-pointer
   my-2 lg:my-0 tracking-wide transition duration-300
   pb-1 border-transparent hover:border-primary-500 hocus:text-primary-500
   flex items-center font-black border-b-0 text-2xl !ml-0`;
-export const MobileNavLinksContainer = `flex flex-1 items-center justify-between`;
-export const NavToggle = `
+const MobileNavLinksContainer = `flex flex-1 items-center justify-between`;
+const NavToggle = `
   lg:hidden z-20 focus:outline-none hocus:text-primary-500 transition duration-300
 `;
-export const MobileNavLinks = `lg:hidden z-10 fixed top-0 inset-x-0 mx-4 my-6 p-8 border text-center rounded-lg text-gray-900 bg-white`;
+const MobileNavLinks = `lg:hidden z-10 fixed top-0 inset-x-0 mx-4 my-6 p-8 border text-center rounded-lg text-gray-900 bg-white`;
 // ${NavLinks} {
 //   ${tw`flex flex-col items-center`}
 // }
 
-export const DesktopNavLinks = `
+const DesktopNavLinks = `
   hidden lg:flex flex-1 justify-between items-center
 `;
 const Input = `hover:border-primary-100 mr-3 border-2 border-solid p-2 rounded border-gray-300`;
+const Button = tw.button`px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300`;
 
 const tabs = [
   {
@@ -117,7 +117,7 @@ const Header = ({ className, collapseBreakpointClass = "lg" }: IHeader) => {
       <Link href={"/signin"} className={`lg:ml-12! ${NavLink}`}>
         Login
       </Link>
-      <button className={PrimaryButton}>Sign Up</button>
+      <Button>Sign Up</Button>
     </div>
   );
   const DefaultLogoLink = (

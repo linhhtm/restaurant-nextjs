@@ -1,3 +1,5 @@
+const withTwin = require('./withTwin.js')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -9,7 +11,7 @@ const nextConfig = {
     ],
   },
   webpack(config) {
-    config.module.rules.push({
+      config.module.rules.push({
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
@@ -28,5 +30,7 @@ const nextConfig = {
     ];
   },
 };
-
-module.exports = nextConfig;
+module.exports = withTwin({
+  reactStrictMode: true,
+  ...nextConfig
+})

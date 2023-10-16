@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { AnimationRevealPage } from "helpers";
 import tw, { css, styled } from "twin.macro";
 import illustration from "images/login-illustration.svg";

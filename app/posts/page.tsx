@@ -11,6 +11,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { default as NextImage } from "next/image";
 import API from "service";
+// import tw from "twin.macro"
 
 const HeadingRow = `flex`;
 const Heading = `text-gray-900`;
@@ -73,10 +74,10 @@ const PostList = ({ headingText = "Blog Posts" }: any) => {
   }, []);
 
   return (
-    <div className={Container}>
-      <div className={ContentWithPaddingXl}>
+    <Container>
+      <ContentWithPaddingXl>
         <div className={HeadingRow}>
-          <div className={`${SectionHeading} ${Heading}`}>{headingText}</div>
+          <SectionHeading className={Heading}>{headingText}</SectionHeading>
         </div>
         <div className={Posts}>
           {data.data?.map((post: IPost, index: number) => (
@@ -113,16 +114,13 @@ const PostList = ({ headingText = "Blog Posts" }: any) => {
         </div>
         {data.page < data.lastPage && (
           <div className={ButtonContainer}>
-            <button
-              className={`${PrimaryButton} ${LoadMoreButton}`}
-              onClick={onLoadMoreClick}
-            >
+            <PrimaryButton className={LoadMoreButton} onClick={onLoadMoreClick}>
               Load More
-            </button>
+            </PrimaryButton>
           </div>
         )}
-      </div>
-    </div>
+      </ContentWithPaddingXl>
+    </Container>
   );
 };
 

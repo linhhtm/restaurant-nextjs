@@ -20,10 +20,10 @@ const Link = `inline-block mt-2 text-sm text-primary-500 font-bold cursor-pointe
 
 const ThreeColSimpleWithImage = ({ data }: any) => {
   return (
-    <div className={Container}>
+    <Container>
       <div className={Content}>
         <div className={HeadingInfoContainer}>
-          <div className={HeadingTitle}>Popular Blog Posts</div>
+          <HeadingTitle>Popular Blog Posts</HeadingTitle>
           <p className={HeadingDescription}>
             Some amazing blog posts that are written by even more amazing
             people.
@@ -48,7 +48,7 @@ const ThreeColSimpleWithImage = ({ data }: any) => {
       </div>
       <SvgDecoratorBlob1 className="-z-10 absolute bottom-0 right-0 w-48 h-48 transform translate-x-40 -translate-y-8 opacity-25" />
       <SvgDecoratorBlob2 className="-z-10 absolute top-0 left-0 w-48 h-48 transform -translate-x-32 translate-y-full opacity-25" />
-    </div>
+    </Container>
   );
 };
 

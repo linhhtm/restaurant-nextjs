@@ -31,7 +31,7 @@ const TwoColSignleFeatureWithStats = ({
   ];
 
   return (
-    <div className={Container}>
+    <Container>
       <div className={TwoColumn}>
         <div className={`${Column} ${ImageColumn}`}>
           <div className="relative rounded h-full">
@@ -45,7 +45,7 @@ const TwoColSignleFeatureWithStats = ({
           })}
         >
           <div className={TextContent}>
-            <div className={`${Heading} ${SectionHeading}`}>{title}</div>
+            <SectionHeading className={Heading}>{title}</SectionHeading>
             <p className={Description}>{description}</p>
             <div className={Statistics}>
               {statistics.map((statistic, index) => (
@@ -59,7 +59,7 @@ const TwoColSignleFeatureWithStats = ({
         </div>
       </div>
       <ThreeColSimpleWithImage data={posts} />
-    </div>
+    </Container>
   );
 };
 

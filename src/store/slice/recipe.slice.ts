@@ -46,7 +46,7 @@ const slice = createSlice({
       if (payload.liked) {
         favoriteList.splice(index, 1);
         if (indexInList > -1) list[indexInList].liked = false;
-        favoriteListObj.delete(payload.idMeal);
+        delete favoriteListObj[payload.idMeal];
       } else {
         favoriteList.push({ ...payload, liked: true });
         if (indexInList > -1) list[indexInList].liked = true;

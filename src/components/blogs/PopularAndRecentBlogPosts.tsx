@@ -5,7 +5,7 @@ import { IPost } from "types";
 import Link from "next/link";
 import { default as NextImage } from "next/image";
 
-const Row = `flex flex-col lg:flex-row -mb-10`;
+const Row = `flex flex-col lg:flex-row mb-10`;
 const Heading = `!text-left lg:!text-4xl xl:!text-5xl`;
 const PopularPostsContainer = `lg:w-2/3`;
 const PostsContainer = `mt-12 flex flex-col sm:flex-row sm:justify-between lg:justify-start`;
@@ -39,11 +39,11 @@ const PopularAndRecentBlogPost = ({
   recentPosts: IPost[];
 }) => {
   return (
-    <div className={Container}>
-      <div className={ContentWithPaddingXl}>
+    <Container>
+      <ContentWithPaddingXl>
         <div className={Row}>
           <div className={PopularPostsContainer}>
-            <div className={`${SectionHeading} ${Heading}`}>Table talks</div>
+            <SectionHeading className={Heading}>Table talks</SectionHeading>
             <div className={PostsContainer}>
               {popularPosts.map((post: IPost, index: number) => (
                 <Link key={index} href={`/posts/${post.id}`}>
@@ -82,7 +82,7 @@ const PopularAndRecentBlogPost = ({
             </div>
           </div>
           <div className={RecentPostsContainer}>
-            <div className={`${SectionHeading} ${Heading}`}>Recent Posts</div>
+            <SectionHeading className={Heading}>Recent Posts</SectionHeading>
             <div className={`${PostsContainer} flex flex-wrap lg:flex-col`}>
               {recentPosts.map((post: IPost, index: number) => (
                 <Link key={index} href={`/posts/${post.id}`}>
@@ -113,8 +113,8 @@ const PopularAndRecentBlogPost = ({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </ContentWithPaddingXl>
+    </Container>
   );
 };
 

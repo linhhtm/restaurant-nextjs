@@ -27,6 +27,7 @@ const SocialLink = `cursor-pointer inline-block p-2 rounded-full bg-gray-700 tex
 
 const Footer = () => {
   return (
+    <div>
     <div className={Container}>
       <div className={FiveColumns}>
         <div className={`${Column} ${WideColumn}`}>
@@ -130,6 +131,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
+    </div>
     </div>
   );
 };

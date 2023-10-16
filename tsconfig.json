@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,13 +27,30 @@
     ],
     "baseUrl": "",
     "paths": {
-      "components": ["src/components"],
-      "store/*": ["src/store/*"],
-      "styles/*": ["src/styles/*"],
-      "helpers": ["src/helpers"],
-      "types": ["src/types"],
-      "images/*": ["public/images/*"],
-      "service": ["src/service"]
+      "components": [
+        "src/components"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "store/*": [
+        "src/store/*"
+      ],
+      "styles/*": [
+        "src/styles/*"
+      ],
+      "helpers": [
+        "src/helpers"
+      ],
+      "types": [
+        "src/types"
+      ],
+      "images/*": [
+        "public/images/*"
+      ],
+      "service": [
+        "src/service"
+      ]
     }
   },
   "include": [
@@ -37,7 +58,15 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "tailwind.config.js"
+    "tailwind.config.js",
+    "src",
+    "types",
+    "app"
   ],
-  "exclude": ["node_modules"]
+  "types": [
+    "types"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

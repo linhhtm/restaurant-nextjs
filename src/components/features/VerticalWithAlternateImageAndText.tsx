@@ -33,10 +33,10 @@ const VerticalWithAlternateImageAndText = ({ data = {}, posts }: any) => {
   }, [data]);
 
   return (
-    <div className={Container}>
+    <Container>
       <div className={SingleColumn}>
         <div className={HeadingInfoContainer}>
-          <div className={HeadingTitle}>{strMeal}</div>
+          <HeadingTitle>{strMeal}</HeadingTitle>
           <p className={HeadingDescription}>{strInstructions}</p>
         </div>
 
@@ -53,7 +53,7 @@ const VerticalWithAlternateImageAndText = ({ data = {}, posts }: any) => {
           </div>
         </div>
         <div className={HeadingInfoContainer}>
-          <div className={HeadingTitle}>Ingredients</div>
+          <HeadingTitle>Ingredients</HeadingTitle>
           {ingredients.map((el, i) => (
             <div className={Content} key={i}>
               <div className={Subtitle}>
@@ -68,7 +68,7 @@ const VerticalWithAlternateImageAndText = ({ data = {}, posts }: any) => {
       <SvgDotPatternIcon className="absolute top-0 right-0 transform translate-x-20 rotate-45 translate-y-24 -z-10 opacity-25 text-primary-500 fill-current w-24" />
       <SvgDotPatternIcon className="absolute bottom-0 left-0 transform -translate-x-20 rotate-45 -translate-y-8 -z-10 opacity-25 text-primary-500 fill-current w-24" />
       <SvgDotPatternIcon className="absolute bottom-0 right-0 transform translate-x-20 rotate-90 -translate-y-24 -z-10 opacity-25 text-primary-500 fill-current w-24" />
-    </div>
+    </Container>
   );
 };
 

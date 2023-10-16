@@ -9,12 +9,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
-  title: "Restaurant",
+  title: "Restaurant"
 };
 
-export default function RootLayout({
-  children,
-}: {
+export default function RootLayout({ children }: {
   children: React.ReactNode;
 }) {
   return (
@@ -24,8 +22,7 @@ export default function RootLayout({
           <ToastContainer />
           <AnimationRevealPage>
             <GlobalStyles />
-            <Header />
-            {children}
+            <Header /> {children}
             <SimpleSubscribeNewsletter />
             <Footer />
           </AnimationRevealPage>

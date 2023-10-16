@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { ReactModalAdapter, ResponsiveVideoEmbed } from "helpers";
 import PlayIcon from "feather-icons/dist/icons/play-circle.svg";
@@ -36,7 +35,7 @@ const TwoColumnWithVideo = ({
 
   return (
     <>
-      <div className={Container}>
+      <Container>
         <div className={TwoColumn}>
           <div className={LeftColumn}>
             <h1 className={Heading}>{heading}</h1>
@@ -72,7 +71,7 @@ const TwoColumnWithVideo = ({
         <ReactModalAdapter show={modalIsOpen} onClose={toggleModal} title="">
           <ResponsiveVideoEmbed url={watchVideoYoutubeUrl} />
         </ReactModalAdapter>
-      </div>
+      </Container>
     </>
   );
 };

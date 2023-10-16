@@ -7,6 +7,7 @@ import {
   TabCardGrid,
   PopularAndRecentBlogPosts,
 } from "components";
+import tw from "twin.macro";
 import API from "service";
 import clsx from "clsx";
 import { useAppDispatch, useAppSelector } from "store/hook";
@@ -17,8 +18,8 @@ import {
 } from "store/slice";
 import { IRecipe } from "types";
 
-const Subheading = `tracking-wider text-sm font-medium`;
-const HighlightedText = `bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
+const Subheading = tw.div`tracking-wider text-sm font-medium`;
+const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 const imageCss = `rounded-4xl`;
 
 const App = () => {
@@ -58,14 +59,13 @@ const App = () => {
       dispatch(updateRecipeListByCategory(obj));
     })();
   }, []);
-
   return (
     <div>
       <TwoColumnWithVideo
         heading={
           <>
             Delicious & Affordable{" "}
-            <span className={HighlightedText}>Meals Near You.</span>
+            <HighlightedText>Meals Near You.</HighlightedText>
           </>
         }
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -86,7 +86,7 @@ const App = () => {
       <ThreeColSimple
         heading={
           <>
-            Amazing <span className={HighlightedText}>Services.</span>
+            Amazing <HighlightedText>Services.</HighlightedText>
           </>
         }
         cards={[
@@ -113,10 +113,10 @@ const App = () => {
         imageCss={`!w-20 !h-20`}
       />
       <TwoColSingleFeatureWithStats2
-        subheading={<span className={Subheading}>A Reputed Brand</span>}
+        subheading={<Subheading>A Reputed Brand</Subheading>}
         heading={
           <>
-            Why <span className={HighlightedText}>HomeKitchen ?</span>
+            Why <HighlightedText>HomeKitchen ?</HighlightedText>
           </>
         }
         statistics={[

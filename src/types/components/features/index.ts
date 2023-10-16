@@ -7,8 +7,8 @@ export interface ITwoColSingleFeatureWithStats2 {
   primaryButtonText?: string
   primaryButtonUrl?: string
   imageSrc?: string
-  imageCss?: Object | null
-  imageContainerCss?: string | null
+  imageCss?: string
+  imageContainerCss?: string
   imageDecoratorBlob?: boolean
   imageDecoratorBlobCss?: string | null
   imageInsideDiv?: boolean

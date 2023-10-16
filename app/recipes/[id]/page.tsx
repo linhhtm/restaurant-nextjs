@@ -1,3 +1,4 @@
+'use client'
 import { VerticalWithAlternateImageAndText } from "components";
 import React from "react";
 import API from "service";
