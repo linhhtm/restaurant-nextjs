@@ -11,6 +11,8 @@ import { getFavoriteList } from "store/slice/recipe.slice";
 import { CardRecipe } from "components/cards";
 import clsx from "clsx";
 import tw from "twin.macro";
+import { useUser } from '@auth0/nextjs-auth0/client';
+import DropdownHeader from "./DropdownHeader";
 
 const collapseBreakPointCssMap = {
   sm: {
@@ -40,7 +42,7 @@ const HeaderStyle = `
   max-w-screen-xl mx-auto
   my-3
 `;
-const NavLinks = `inline-block`;
+const NavLinks = `flex items-center flex-wrap`;
 const NavLink = `cursor-pointer
   text-lg my-2 lg:text-sm lg:mx-6 lg:my-0
   font-semibold tracking-wide transition duration-300
@@ -89,6 +91,7 @@ const Header = ({ className, collapseBreakpointClass = "lg" }: IHeader) => {
   const activeTab = pathname;
   const favoriteList = useSelector(getFavoriteList);
   const { showNavLinks, animation, toggleNavbar } = useAnimatedNavToggler();
+  const { user } = useUser();
 
   const collapseBreakpointCss =
     collapseBreakPointCssMap[
@@ -111,13 +114,19 @@ const Header = ({ className, collapseBreakpointClass = "lg" }: IHeader) => {
           {el.name}
         </Link>
       ))}
-      <Link href="#" className={NavLink} onClick={showFavoriteList}>
-        <HeartIcon className="inline" />
-      </Link>
-      <Link href={"/signin"} className={`lg:ml-12! ${NavLink}`}>
-        Login
-      </Link>
-      <Button>Sign Up</Button>
+      {user ? (
+        <DropdownHeader/>
+      ) : (
+        <>
+          <Link href="#" className={NavLink} onClick={showFavoriteList}>
+            <HeartIcon className="inline" />
+          </Link>
+          <Button onClick={() => router.push("/api/auth/login")}>
+            Login
+          </Button>
+          {/* <Button>Sign Up</Button> */}
+        </>
+      )}
     </div>
   );
   const DefaultLogoLink = (
@@ -149,7 +158,7 @@ const Header = ({ className, collapseBreakpointClass = "lg" }: IHeader) => {
         className={clsx(DesktopNavLinks, collapseBreakpointCss.desktopNavLinks)}
       >
         {DefaultLogoLink}
-        <div>
+        <div className="flex items-center">
           <input
             className={Input}
             ref={inputRef}

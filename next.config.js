@@ -8,6 +8,7 @@ const nextConfig = {
       "www.themealdb.com",
       "gl.amthuc365.vn",
       "www.simplyrecipes.com",
+      "s.gravatar.com"
     ],
   },
   webpack(config) {

@@ -1,11 +1,8 @@
 'use client'
 import { AnimationRevealPage } from "helpers";
-import tw, { css, styled } from "twin.macro";
-import illustration from "images/login-illustration.svg";
-import logo from "images/logo.svg";
-import googleIconImageSrc from "images/google-icon.png";
-import twitterIconImageSrc from "images/twitter-icon.png";
+import tw, { styled } from "twin.macro";
 import LoginIcon from "feather-icons/dist/icons/log-in.svg";
+import { useRouter } from 'next/navigation'
 
 const Container = tw.div`relative min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -49,26 +46,18 @@ const IllustrationImage = styled.div<{ imageSrc: string }>`
   ${(props) => `background-image: url("${props.imageSrc}");`}
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
-const PostContainer = styled.div`
-  ${tw`mt-10 w-full sm:w-1/2 lg:w-1/3 sm:pr-8`}
-  ${(props: any) =>
-    props.featured &&
-    css`
-      ${tw`w-full!`}
-    `}
-`;
 const SignIn = ({
   logoLinkUrl = "#",
-  illustrationImageSrc = illustration,
+  illustrationImageSrc = 'images/login-illustration.svg',
   headingText = "Sign In To Treact",
   socialButtons = [
     {
-      iconImageSrc: googleIconImageSrc,
+      iconImageSrc: 'images/google-icon.png',
       text: "Sign In With Google",
       url: "https://google.com",
     },
     {
-      iconImageSrc: twitterIconImageSrc,
+      iconImageSrc: 'images/twitter-icon.png',
       text: "Sign In With Twitter",
       url: "https://twitter.com",
     },
@@ -78,16 +67,16 @@ const SignIn = ({
   forgotPasswordUrl = "#",
   signupUrl = "#",
 }) => {
+  const router = useRouter()
   return (
     <AnimationRevealPage>
       <Container>
         <Content>
           <MainContainer>
             <LogoLink href={logoLinkUrl}>
-              <LogoImage src={logo} />
+              <LogoImage src={'images/logo.svg'} />
             </LogoLink>
             <MainContent>
-              <PostContainer />
               <Heading>{headingText}</Heading>
               <FormContainer>
                 <SocialButtonsContainer>
@@ -110,27 +99,27 @@ const SignIn = ({
                 <Form>
                   <Input type="email" placeholder="Email" />
                   <Input type="password" placeholder="Password" />
-                  <SubmitButton type="submit">
+                  <SubmitButton type="button" onClick={() => auth.login()}>
                     <SubmitButtonIcon className="icon" />
                     <span className="text">{submitButtonText}</span>
                   </SubmitButton>
                 </Form>
-                <p tw="mt-6 text-xs text-gray-600 text-center">
-                  <a
-                    href={forgotPasswordUrl}
-                    tw="border-b border-gray-500 border-dotted"
+                <p className="mt-6 text-xs text-gray-600 text-center">
+                <div
+                    onClick={() => router.push(forgotPasswordUrl)}
+                    className="cursor-pointer border-b border-gray-500 border-dotted"
                   >
                     Forgot Password ?
-                  </a>
+                  </div>
                 </p>
-                <p tw="mt-8 text-sm text-gray-600 text-center">
+                <p className="mt-8 text-sm text-gray-600 text-center">
                   Dont have an account?{" "}
-                  <a
-                    href={signupUrl}
-                    tw="border-b border-gray-500 border-dotted"
+                  <div
+                    onClick={() => router.push(signupUrl)}
+                    className="cursor-pointer border-b border-gray-500 border-dotted"
                   >
                     Sign Up
-                  </a>
+                  </div>
                 </p>
               </FormContainer>
             </MainContent>
