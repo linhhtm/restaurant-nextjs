@@ -67,7 +67,7 @@ const SignIn = ({
   SubmitButtonIcon = LoginIcon,
   forgotPasswordUrl = "#",
   signupUrl = "#",
-}) => {
+}: any) => {
   const router = useRouter()
   return (
     <AnimationRevealPage>
@@ -81,8 +81,8 @@ const SignIn = ({
               <Heading>{headingText}</Heading>
               <FormContainer>
                 <SocialButtonsContainer>
-                  {socialButtons.map((socialButton, index) => (
-                    <SocialButton key={index} href={socialButton.url}>
+                  {socialButtons.map((socialButton: any) => (
+                    <SocialButton key={socialButton.url} href={socialButton.url}>
                       <span className="iconContainer">
                         <Image
                           src={socialButton.iconImageSrc}
