@@ -10,9 +10,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { usePathname } from "next/navigation";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 
-export const metadata = {
-  title: "Restaurant",
-};
+// export const metadata = {
+//   title: "Restaurant",
+// };
 
 export default function RootLayout({
   children,
