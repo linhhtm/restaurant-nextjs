@@ -7,7 +7,9 @@ function getErrorMessageFromResponseBody(string: string) {
     if (json.errors) {
       errorString = json.errors[0].msg;
     }
-  } catch (parseOrAccessError) {}
+  } catch (parseOrAccessError) {
+    //catch
+  }
 
   return errorString;
 }

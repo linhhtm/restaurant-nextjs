@@ -3,14 +3,24 @@ import { TwoColSingleFeatureWithStats } from "components";
 import API from "service";
 import { IPost } from "types";
 import { notFound } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const PostDetail = async ({ params }: { params: { id: IPost["id"] } }) => {
-  const res = await API.getBlogDetail(params.id);
-  const resPost = await API.getBlogPopular({ size: 3 });
-  if (!res) return notFound();
+const PostDetail = ({ params }: { params: { id: IPost["id"] } }) => {
+  const [posts, setPosts] = useState([])
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    (async () => {
+      const res = await API.getBlogDetail(params.id);
+      const posts = await API.getBlogPopular({ size: 3 });
+      setPosts(posts)
+      setData(res)
+      if (!res) return notFound();
+    })()
+  }, [])
 
   return (
-    <TwoColSingleFeatureWithStats data={res || {}} posts={resPost || []} />
+    <TwoColSingleFeatureWithStats data={data} posts={posts} />
   );
 };
 

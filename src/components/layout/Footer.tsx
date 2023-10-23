@@ -3,6 +3,7 @@ import FacebookIcon from "images/facebook-icon.svg";
 import TwitterIcon from "images/twitter-icon.svg";
 import YoutubeIcon from "images/youtube-icon.svg";
 import { default as NextLink } from "next/link";
+import Image from "next/image";
 
 const Container = `relative bg-gray-200 -mx-8 -mb-8 px-8`;
 const FiveColumns = `max-w-screen-xl mx-auto py-16 lg:py-20 flex flex-wrap justify-between`;
@@ -32,7 +33,7 @@ const Footer = () => {
       <div className={FiveColumns}>
         <div className={`${Column} ${WideColumn}`}>
           <div className={LogoContainer}>
-            <img className={LogoImg} src={"/images/logo.jpg"} />
+            <Image alt="logo" className={LogoImg} src={"/images/logo.jpg"} width={48} height={48} />
             <h5 className={LogoText}>HomeKitchen Inc.</h5>
           </div>
           <p className={CompanyDescription}>HomeKitchen description</p>

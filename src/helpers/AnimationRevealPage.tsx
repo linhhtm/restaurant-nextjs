@@ -51,8 +51,10 @@ const AnimationReveal = (props: IAnimationReveal) => {
   );
 };
 
-export default (props: IAnimationReveal) => (
+const AnimationRevealPage = (props: IAnimationReveal) => (
   <div className={StyledDiv}>
     <AnimationReveal {...props} />
   </div>
 );
+
+export default AnimationRevealPage

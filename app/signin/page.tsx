@@ -3,6 +3,7 @@ import { AnimationRevealPage } from "helpers";
 import tw, { styled } from "twin.macro";
 import LoginIcon from "feather-icons/dist/icons/log-in.svg";
 import { useRouter } from 'next/navigation'
+import Image from "next/image";
 
 const Container = tw.div`relative min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -83,10 +84,12 @@ const SignIn = ({
                   {socialButtons.map((socialButton, index) => (
                     <SocialButton key={index} href={socialButton.url}>
                       <span className="iconContainer">
-                        <img
+                        <Image
                           src={socialButton.iconImageSrc}
                           className="icon"
                           alt=""
+                          width={10}
+                          height={10}
                         />
                       </span>
                       <span className="text">{socialButton.text}</span>
@@ -99,7 +102,7 @@ const SignIn = ({
                 <Form>
                   <Input type="email" placeholder="Email" />
                   <Input type="password" placeholder="Password" />
-                  <SubmitButton type="button" onClick={() => auth.login()}>
+                  <SubmitButton type="button">
                     <SubmitButtonIcon className="icon" />
                     <span className="text">{submitButtonText}</span>
                   </SubmitButton>

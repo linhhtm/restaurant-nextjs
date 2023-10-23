@@ -10,6 +10,7 @@ import { ITwoColSingleFeatureWithStats2 } from "types";
 import clsx from "clsx";
 import { Container } from "../misc/Layouts";
 import tw from "twin.macro";
+import Image from 'next/image'
 
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
   const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
@@ -88,7 +89,7 @@ const TwoColSingleFeatureWithStats2 = ({
               style={{ backgroundImage: `url("${imageSrc}")` }}
             />
           ) : (
-            <img src={imageSrc} alt="" />
+            <Image src={imageSrc} alt="" layout="fill"/>
           )}
           {imageDecoratorBlob && (
             <SvgDotPattern

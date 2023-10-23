@@ -13,6 +13,7 @@ import clsx from "clsx";
 import tw from "twin.macro";
 import { useUser } from '@auth0/nextjs-auth0/client';
 import DropdownHeader from "./DropdownHeader";
+import Image from "next/image";
 
 const collapseBreakPointCssMap = {
   sm: {
@@ -131,7 +132,7 @@ const Header = ({ className, collapseBreakpointClass = "lg" }: IHeader) => {
   );
   const DefaultLogoLink = (
     <Link href="/" className={LogoLink}>
-      <img src={"/images/logo.jpg"} className="w-10 mr-3" alt="logo" />
+      <Image src={"/images/logo.jpg"} width={40} height={40} className="w-10 mr-3" alt="logo" />
       HomeKitchen
     </Link>
   );
