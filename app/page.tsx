@@ -79,7 +79,7 @@ const App = () => {
         tabs={tabs}
         heading={
           <>
-            Checkout <span className={HighlightedText}>recipes.</span>
+            Checkout <HighlightedText>recipes.</HighlightedText>
           </>
         }
       />

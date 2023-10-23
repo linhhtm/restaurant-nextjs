@@ -8,6 +8,7 @@ export interface IAnimatedSlideInComponent {
     direction?: string
     offset?: number
     children?: React.ReactNode
+    key?: number
 }
 
 export interface IResponsiveVideoEmbed {
