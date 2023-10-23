@@ -19,25 +19,25 @@ const API = {
   },
   getBlogList: async (req: any) => {
     const data = await serviceHandler(
-      `${process.env.BASE_URL}/api/posts?${new URLSearchParams(req)}`
+      `/api/posts?${new URLSearchParams(req)}`
     );
     return data.status ? [] : data;
   },
   getBlogDetail: async (id: IPost["id"]) => {
-    const data = await serviceHandler(`${process.env.BASE_URL}/api/posts/${id}`);
+    const data = await serviceHandler(`/api/posts/${id}`);
     return data.status ? {} : data;
   },
   getBlogPopular: async (props?: IPaginate) => {
     const { size } = props ?? {};
     const data = await serviceHandler(
-      `${process.env.BASE_URL}/api/posts/popular?size=${size}`
+      `/api/posts/popular?size=${size}`
     );
     return data.status ? [] : data;
   },
   getBlogRecent: async (props?: IPaginate) => {
     const { size } = props ?? {};
     const data = await serviceHandler(
-      `${process.env.BASE_URL}/api/posts/recent?size=${size}`
+      `/api/posts/recent?size=${size}`
     );
     return data.status ? [] : data;
   },
