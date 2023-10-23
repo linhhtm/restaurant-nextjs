@@ -1,3 +1,5 @@
+import React from 'react'
+
 export interface IAnimationReveal {
     disabled?: boolean
     children: any

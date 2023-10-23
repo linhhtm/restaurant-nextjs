@@ -10,6 +10,8 @@
   },
   "rules": {
     "max-len": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "no-empty": "warn",
+    "no-unused-vars": "warn"
   }
 }
