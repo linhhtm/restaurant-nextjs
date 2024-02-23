@@ -2,6 +2,7 @@ import React from 'react'
 
 export interface IAnimationReveal {
     disabled?: boolean
+    className?: string
     children: any
 }
 export interface IAnimatedSlideInComponent {

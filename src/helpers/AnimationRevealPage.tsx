@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useInView, MotionSection } from "helpers";
 import { IAnimatedSlideInComponent, IAnimationReveal } from "types";
@@ -52,9 +53,9 @@ const AnimationReveal = (props: IAnimationReveal) => {
 };
 
 const AnimationRevealPage = (props: IAnimationReveal) => (
-  <div className={StyledDiv}>
+  <div className={`${StyledDiv} ${props.className || ''}`}>
     <AnimationReveal {...props} />
   </div>
 );
 
-export default AnimationRevealPage
+export default AnimationRevealPage;

@@ -1,12 +1,12 @@
 import React from "react";
-import { MotionDiv } from "helpers";
 import { Container, ContentWithPaddingXl, SectionHeading } from "components";
 import { IPost } from "types";
 import Link from "next/link";
 import { default as NextImage } from "next/image";
+import { MotionDiv } from "helpers";
 
 const Row = `flex flex-col lg:flex-row mb-10`;
-const Heading = `!text-left lg:!text-4xl xl:!text-5xl`;
+const Heading = `${SectionHeading} !text-left lg:!text-4xl xl:!text-5xl`;
 const PopularPostsContainer = `lg:w-2/3`;
 const PostsContainer = `mt-12 flex flex-col sm:flex-row sm:justify-between lg:justify-start`;
 const Post = `block sm:max-w-sm cursor-pointer mb-16 last:mb-0 sm:mb-0 sm:odd:mr-8 lg:mr-8 xl:mr-16`;
@@ -39,11 +39,11 @@ const PopularAndRecentBlogPost = ({
   recentPosts: IPost[];
 }) => {
   return (
-    <Container>
-      <ContentWithPaddingXl>
+    <div className={Container}>
+      <div className={ContentWithPaddingXl}>
         <div className={Row}>
           <div className={PopularPostsContainer}>
-            <SectionHeading className={Heading}>Table talks</SectionHeading>
+            <h2 className={`${SectionHeading} ${Heading}`}>Table talks</h2>
             <div className={PostsContainer}>
               {popularPosts.map((post: IPost, index: number) => (
                 <Link key={index} href={`/posts/${post.id}`}>
@@ -60,7 +60,7 @@ const PopularAndRecentBlogPost = ({
                       style={{
                         backgroundImage: `url("${post.imageSrc}")`,
                       }}
-                    />
+                    ></MotionDiv>
                     <h5 className={Title}>{post.title}</h5>
                     <p className={Description}>{post.description}</p>
                     <div className={AuthorInfo}>
@@ -82,7 +82,7 @@ const PopularAndRecentBlogPost = ({
             </div>
           </div>
           <div className={RecentPostsContainer}>
-            <SectionHeading className={Heading}>Recent Posts</SectionHeading>
+            <h2 className={Heading}>Recent Posts</h2>
             <div className={`${PostsContainer} flex flex-wrap lg:flex-col`}>
               {recentPosts.map((post: IPost, index: number) => (
                 <Link key={index} href={`/posts/${post.id}`}>
@@ -101,20 +101,20 @@ const PopularAndRecentBlogPost = ({
                         {post.author?.name}
                       </div>
                     </div>
-                    <MotionDiv
+                    <div
                       className={`${Image} !h-20 !w-20 !flex-shrink-0`}
                       style={{
                         backgroundImage: `url("${post.imageSrc}")`,
                       }}
-                    />
+                    ></div>
                   </div>
                 </Link>
               ))}
             </div>
           </div>
         </div>
-      </ContentWithPaddingXl>
-    </Container>
+      </div>
+    </div>
   );
 };
 

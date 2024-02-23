@@ -1,4 +1,3 @@
-"use client";
 import React, { useLayoutEffect, useState } from "react";
 import {
   TwoColumnWithVideo,
@@ -7,7 +6,6 @@ import {
   TabCardGrid,
   PopularAndRecentBlogPosts,
 } from "components";
-import tw from "twin.macro";
 import API from "service";
 import clsx from "clsx";
 import { useAppDispatch, useAppSelector } from "store/hook";
@@ -16,56 +14,76 @@ import {
   getRecipeListByCategory,
   updateRecipeListByCategory,
 } from "store/slice";
-import { IRecipe } from "types";
+import { ICategory, IRecipe } from "types";
+import { PageProps } from ".next/types/app/page";
+// import TwoColumnWithVideo from "components/hero/TwoColumnWithVideo";
+// import TabCardGrid from "components/cards/TabCardGrid";
+// import ThreeColSimple from "components/features/ThreeColSimple";
+// import TwoColSingleFeatureWithStats2 from "components/features/TwoColSingleFeatureWithStats2";
+// import PopularAndRecentBlogPosts from "components/blogs/PopularAndRecentBlogPosts";
 
-const Subheading = tw.div`tracking-wider text-sm font-medium`;
-const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
+const Subheading = `tracking-wider text-sm font-medium`;
+const HighlightedText = `bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 const imageCss = `rounded-4xl`;
 
-const App = () => {
-  const dispatch = useAppDispatch();
-  const [post, setPost] = useState({
-    popularPosts: [],
-    recentPosts: [],
-  });
-  const tabs = useAppSelector(getRecipeListByCategory);
-  const listFavoriteObj = useAppSelector(getFavoriteListObj);
+const App = async (props: PageProps) => {
+  // const dispatch = useAppDispatch();
+  // const tabs = useAppSelector(getRecipeListByCategory);
+  // const listFavoriteObj = useAppSelector(getFavoriteListObj);
 
-  useLayoutEffect(() => {
-    (async () => {
-      Promise.all([
-        API.getBlogPopular({ size: 2 }),
-        API.getBlogRecent({ size: 5 }),
-      ]).then((values) => {
-        setPost({
-          popularPosts: values[0],
-          recentPosts: values[1],
-        });
+  // useLayoutEffect(() => {
+  //   (async () => {
+  //     Promise.all([
+  //       API.getBlogPopular({ size: 2 }),
+  //       API.getBlogRecent({ size: 5 }),
+  //     ]).then((values) => {
+  //       setPost({
+  //         popularPosts: values[0],
+  //         recentPosts: values[1],
+  //       });
+  //     });
+
+  //     const res = await API.getRecipeList();
+  //     const data = res.meals;
+  //     const obj = {};
+  //     if (data?.length) {
+  //       data.forEach((el: IRecipe) => {
+  //         const key = el.strCategory as keyof typeof obj;
+  //         const array: IRecipe[] = obj[key] || [];
+  //         array.push({ ...el, liked: !!listFavoriteObj[el.idMeal] });
+  //         Object.assign(obj, {
+  //           [key]: array,
+  //         });
+  //       });
+  //     }
+  //     dispatch(updateRecipeListByCategory(obj));
+  //   })();
+  // }, []);
+
+  const popularPosts = await API.getBlogPopular({ size: 2 });
+  const recentPosts = await API.getBlogRecent({ size: 5 });
+  const categories = await API.getCategoryList();
+
+  const recipesByCategory = {} as Record<IRecipe['strCategory'], IRecipe[]>;
+  await Promise.all(
+    categories.map(async (category) => {
+      const recipes = await API.getRecipeListByCategory(category.strCategory);
+      Object.assign(recipesByCategory, {
+        [category.strCategory]: recipes,
       });
+    })
+  );
+  const recipes = Object.keys(recipesByCategory)
+      .sort()
+      .reduce((r, k) => ((r[k] = recipesByCategory[k]), r), {} as Record<IRecipe['strCategory'], IRecipe[]>);
 
-      const res = await API.getRecipeList();
-      const data = res.meals;
-      const obj = {};
-      if (data?.length) {
-        data.forEach((el: IRecipe) => {
-          const key = el.strCategory as keyof typeof obj;
-          const array: IRecipe[] = obj[key] || [];
-          array.push({ ...el, liked: !!listFavoriteObj[el.idMeal] });
-          Object.assign(obj, {
-            [key]: array,
-          });
-        });
-      }
-      dispatch(updateRecipeListByCategory(obj));
-    })();
-  }, []);
   return (
     <div>
       <TwoColumnWithVideo
         heading={
           <>
             Delicious & Affordable{" "}
-            <HighlightedText>Meals Near You.</HighlightedText>
+            <span className={HighlightedText}>Meals Near You.</span>
           </>
         }
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -76,17 +94,18 @@ const App = () => {
         watchVideoButtonText="Meet The Chefs"
       />
       <TabCardGrid
-        tabs={tabs}
+        tabs={recipes}
+        {...props}
         heading={
           <>
-            Checkout <HighlightedText>recipes.</HighlightedText>
+            Checkout <span className={HighlightedText}>recipes.</span>
           </>
         }
       />
       <ThreeColSimple
         heading={
           <>
-            Amazing <HighlightedText>Services.</HighlightedText>
+            Amazing <span className={HighlightedText}>Services.</span>
           </>
         }
         cards={[
@@ -113,10 +132,10 @@ const App = () => {
         imageCss={`!w-20 !h-20`}
       />
       <TwoColSingleFeatureWithStats2
-        subheading={<Subheading>A Reputed Brand</Subheading>}
+        subheading={<div className={Subheading}>A Reputed Brand</div>}
         heading={
           <>
-            Why <HighlightedText>HomeKitchen ?</HighlightedText>
+            Why <span className={HighlightedText}>HomeKitchen ?</span>
           </>
         }
         statistics={[
@@ -144,8 +163,8 @@ const App = () => {
         textOnLeft={true}
       />
       <PopularAndRecentBlogPosts
-        recentPosts={post.recentPosts}
-        popularPosts={post.popularPosts}
+        recentPosts={recentPosts}
+        popularPosts={popularPosts}
       />
     </div>
   );

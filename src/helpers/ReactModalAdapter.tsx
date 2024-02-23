@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import CloseIcon from "feather-icons/dist/icons/x.svg";
 

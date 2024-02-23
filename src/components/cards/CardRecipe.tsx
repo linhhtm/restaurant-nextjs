@@ -1,11 +1,11 @@
 import React from "react";
-import { MotionDiv } from "helpers";
 import { IRecipe } from "types";
 import Link from "next/link";
 import HeartIcon from "feather-icons/dist/icons/heart.svg";
 import { updateFavoriteList } from "store/slice/recipe.slice";
 import clsx from "clsx";
 import { useAppDispatch } from "store/hook";
+import { MotionDiv } from "helpers";
 
 const CardContainer = `mb-5 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12`;
 const Card = `relative bg-gray-200 rounded-b block max-w-xs mx-auto sm:max-w-none sm:mx-0`;
@@ -18,10 +18,10 @@ const CardTitle = `text-lg font-semibold group-hover:text-primary-500`;
 const CardContent = `mt-1 text-sm font-medium text-gray-600 line-clamp-3`;
 
 const CardRecipe = ({ data }: Record<string, any>) => {
-  const dispatch = useAppDispatch();
-  const toFavoriteList = (item: IRecipe) => {
-    dispatch(updateFavoriteList(item));
-  };
+  // const dispatch = useAppDispatch();
+  // const toFavoriteList = (item: IRecipe) => {
+  //   dispatch(updateFavoriteList(item));
+  // };
   return (
     <div className={CardContainer}>
       <MotionDiv
@@ -35,7 +35,9 @@ const CardRecipe = ({ data }: Record<string, any>) => {
           style={{ backgroundImage: `url("${data.strMealThumb}")` }}
         ></div>
         <div className={CardHeartContainer}>
-          <div className={CardHeart} onClick={() => toFavoriteList(data)}>
+          <div className={CardHeart} 
+          // onClick={() => toFavoriteList(data)}
+          >
             <HeartIcon
               className={clsx("w-6 h-6 fill-current", {
                 "text-red-600": data.liked,

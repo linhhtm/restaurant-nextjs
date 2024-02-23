@@ -1,41 +1,44 @@
-"use client";
 import "./globals.css";
-import GlobalStyles from "styles/GlobalStyles";
 import { StoreProvider } from "store/provider";
 import { AnimationRevealPage } from "helpers";
 import { SimpleSubscribeNewsletter, Header, Footer } from "components";
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { usePathname } from "next/navigation";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { headers } from 'next/headers';
+import { subscribe } from "components/forms/action";
 
-// export const metadata = {
-//   title: "Restaurant",
-// };
+export const metadata = {
+  title: "Restaurant",
+};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const hideLayout = ["/signin"].includes(pathname);
+  const headersList = headers();
+  // read the custom x-url header
+  const pathname = headersList.get('x-url') ?? "";
+  const hideLayout = ['signin'].some(substring => pathname.includes(substring))
+
   return (
     <html lang="en">
-      <body>
+      <body className="bg-white antialiased text-purple-500 overflow-x-hidden high">
         <UserProvider>
           <StoreProvider>
             <ToastContainer />
-            <GlobalStyles />
             {hideLayout ? (
               children
             ) : (
+              <div className="-mt-8">
               <AnimationRevealPage>
                 <Header /> {children}
-                <SimpleSubscribeNewsletter />
+                <SimpleSubscribeNewsletter subscribe={subscribe} />
                 <Footer />
               </AnimationRevealPage>
+              </div>
             )}
           </StoreProvider>
         </UserProvider>

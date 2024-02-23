@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+"use client";
+import { useState } from "react";
 import { ReactModalAdapter, ResponsiveVideoEmbed } from "helpers";
 import PlayIcon from "feather-icons/dist/icons/play-circle.svg";
 import SvgDecoratorBlob1 from "images/svg-decorator-blob-1.svg";
@@ -7,7 +8,6 @@ import DesignIllustration from "images/design-illustration.svg";
 import { ITwoColumnWithVideo } from "types";
 import { Container } from "components";
 import Image from "next/image";
-
 const TwoColumn = `flex flex-col lg:flex-row md:items-center max-w-screen-xl mx-auto py-20 md:py-24`;
 const LeftColumn = `relative lg:w-6/12 lg:pr-12 flex-shrink-0 text-center lg:text-left`;
 const RightColumn = `relative mt-12 lg:mt-0 flex flex-col justify-center`;
@@ -30,49 +30,48 @@ const TwoColumnWithVideo = ({
   imageCss = undefined,
   imageDecoratorBlob = false,
 }: ITwoColumnWithVideo) => {
+ 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
   return (
-    <>
-      <Container>
-        <div className={TwoColumn}>
-          <div className={LeftColumn}>
-            <h1 className={Heading}>{heading}</h1>
-            <div className={Paragraph}>{description}</div>
-            <div className={Actions}>
-              <button className={PrimaryButton}>{primaryButtonText}</button>
-              <button className={WatchVideoButton} onClick={toggleModal}>
-                <span>
-                  <PlayIcon className="stroke-1" />
-                </span>
-                <span className="ml-2 font-medium">{watchVideoButtonText}</span>
-              </button>
-            </div>
-          </div>
-          <div className={RightColumn}>
-            <div className={IllustrationContainer}>
-              <Image
-                className={imageCss}
-                src={imageSrc}
-                alt="Hero"
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: "100%", height: "auto" }} // optional
-              />
-              {imageDecoratorBlob && (
-                <SvgDecoratorBlob2 className="pointer-events-none fill-current text-primary-500 opacity-25 absolute w-32 h-32 right-0 bottom-0 transform translate-x-10 translate-y-10 -z-10" />
-              )}
-            </div>
+    <div className={Container}>
+      <div className={TwoColumn}>
+        <div className={LeftColumn}>
+          <h1 className={Heading}>{heading}</h1>
+          <div className={Paragraph}>{description}</div>
+          <div className={Actions}>
+            <button className={PrimaryButton}>{primaryButtonText}</button>
+            <button className={WatchVideoButton} onClick={toggleModal}>
+              <span>
+                <PlayIcon className="stroke-1" />
+              </span>
+              <span className="ml-2 font-medium">{watchVideoButtonText}</span>
+            </button>
           </div>
         </div>
-        <SvgDecoratorBlob1 className="pointer-events-none opacity-5 absolute left-0 bottom-0 h-64 w-64 transform -translate-x-2/3  -z-10" />
-        <ReactModalAdapter show={modalIsOpen} onClose={toggleModal} title="">
-          <ResponsiveVideoEmbed url={watchVideoYoutubeUrl} />
-        </ReactModalAdapter>
-      </Container>
-    </>
+        <div className={RightColumn}>
+          <div className={IllustrationContainer}>
+            <Image
+              className={imageCss}
+              src={imageSrc}
+              alt="Hero"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "100%", height: "auto" }} // optional
+            />
+            {imageDecoratorBlob && (
+              <SvgDecoratorBlob2 className="pointer-events-none fill-current text-primary-500 opacity-25 absolute w-32 h-32 right-0 bottom-0 transform translate-x-10 translate-y-10 -z-10" />
+            )}
+          </div>
+        </div>
+      </div>
+      <SvgDecoratorBlob1 className="pointer-events-none opacity-5 absolute left-0 bottom-0 h-64 w-64 transform -translate-x-2/3  -z-10" />
+      <ReactModalAdapter show={modalIsOpen} onClose={toggleModal} title="">
+        <ResponsiveVideoEmbed url={watchVideoYoutubeUrl} />
+      </ReactModalAdapter>
+    </div>
   );
 };
 

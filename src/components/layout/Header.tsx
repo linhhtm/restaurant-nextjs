@@ -1,5 +1,6 @@
+'use client'
 import React, { useEffect, useRef, useState } from "react";
-import { ReactModalAdapter, useAnimatedNavToggler, MotionDiv } from "helpers";
+import { MotionDiv, ReactModalAdapter, useAnimatedNavToggler } from "helpers";
 import MenuIcon from "feather-icons/dist/icons/menu.svg";
 import CloseIcon from "feather-icons/dist/icons/x.svg";
 import { IHeader, IRecipe } from "types";
@@ -10,8 +11,7 @@ import { useSelector } from "react-redux";
 import { getFavoriteList } from "store/slice/recipe.slice";
 import { CardRecipe } from "components/cards";
 import clsx from "clsx";
-import tw from "twin.macro";
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useUser } from "@auth0/nextjs-auth0/client";
 import DropdownHeader from "./DropdownHeader";
 import Image from "next/image";
 
@@ -66,7 +66,7 @@ const DesktopNavLinks = `
   hidden lg:flex flex-1 justify-between items-center
 `;
 const Input = `hover:border-primary-100 mr-3 border-2 border-solid p-2 rounded border-gray-300`;
-const Button = tw.button`px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300`;
+const Button = `px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300`;
 
 const tabs = [
   {
@@ -116,15 +116,19 @@ const Header = ({ className, collapseBreakpointClass = "lg" }: IHeader) => {
         </Link>
       ))}
       {user ? (
-        <DropdownHeader/>
+        <DropdownHeader />
       ) : (
         <>
           <Link href="#" className={NavLink} onClick={showFavoriteList}>
             <HeartIcon className="inline" />
           </Link>
-          <Button onClick={() => router.push("/api/auth/login")}>
+          <Link href={"/api/auth/login"}>
+          <button
+            className={Button}
+          >
             Login
-          </Button>
+          </button>
+          </Link>
           {/* <Button>Sign Up</Button> */}
         </>
       )}
@@ -132,7 +136,13 @@ const Header = ({ className, collapseBreakpointClass = "lg" }: IHeader) => {
   );
   const DefaultLogoLink = (
     <Link href="/" className={LogoLink}>
-      <Image src={"/images/logo.jpg"} width={40} height={40} className="w-10 mr-3" alt="logo" />
+      <Image
+        src={"/images/logo.jpg"}
+        width={40}
+        height={40}
+        className="w-10 mr-3"
+        alt="logo"
+      />
       HomeKitchen
     </Link>
   );

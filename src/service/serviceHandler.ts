@@ -1,5 +1,5 @@
-import { toast } from "react-toastify";
-
+// import { toast } from "react-toastify";
+// api: https://www.themealdb.com/api.php
 function getErrorMessageFromResponseBody(string: string) {
   let errorString = string;
   try {
@@ -26,16 +26,16 @@ const serviceHandler = async (service: string, init?: any) => {
       return data;
     }
   } catch (err: any) {
-    toast.error(err.message, {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+    // toast.error(err.message, {
+    //   position: "bottom-right",
+    //   autoClose: 5000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    // });
 
     return {
       status: 500,

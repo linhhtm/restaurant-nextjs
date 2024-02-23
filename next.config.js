@@ -1,18 +1,29 @@
-const withTwin = require('./withTwin.js')
+// const withTwin = require('./withTwin.js')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      "images.unsplash.com",
-      "www.themealdb.com",
-      "gl.amthuc365.vn",
-      "www.simplyrecipes.com",
-      "s.gravatar.com"
-    ],
+    remotePatterns: [{
+      hostname: "images.unsplash.com"
+    },
+    {
+      hostname: "png.pngtree.com"
+    },
+    {
+      hostname: "s.gravatar.com"
+    },
+    {
+      hostname: "www.simplyrecipes.com"
+    },
+    {
+      hostname: "gl.amthuc365.vn"
+    },
+    {
+      hostname: "www.themealdb.com"
+    }]
   },
   webpack(config) {
-      config.module.rules.push({
+    config.module.rules.push({
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
@@ -31,7 +42,7 @@ const nextConfig = {
     ];
   },
 };
-module.exports = withTwin({
+module.exports = {
   reactStrictMode: true,
-  ...nextConfig
-})
+  ...nextConfig,
+};

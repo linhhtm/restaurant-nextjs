@@ -13,7 +13,7 @@ const Heading = `text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-
 const Description = `text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100 mt-4`;
 
 const Statistics = `mt-6 lg:mt-8 xl:mt-16 flex flex-wrap`;
-const Statistic = `text-lg sm:text-2xl lg:text-3xl w-1/2 mt-4 lg:mt-10 text-center md:text-left`;
+const Statistic = `statistic text-lg sm:text-2xl lg:text-3xl w-1/2 mt-4 lg:mt-10 text-center md:text-left`;
 const Value = `font-bold text-primary-500`;
 const Key = `font-medium text-gray-700`;
 
@@ -31,11 +31,11 @@ const TwoColSignleFeatureWithStats = ({
   ];
 
   return (
-    <Container>
+    <div className={Container}>
       <div className={TwoColumn}>
         <div className={`${Column} ${ImageColumn}`}>
           <div className="relative rounded h-full">
-            <Image layout="fill" alt="" src={imageSrc} />
+            <Image  alt="" src={imageSrc} />
           </div>
         </div>
         <div
@@ -45,7 +45,7 @@ const TwoColSignleFeatureWithStats = ({
           })}
         >
           <div className={TextContent}>
-            <SectionHeading className={Heading}>{title}</SectionHeading>
+            <h2 className={`${SectionHeading} ${Heading}`}>{title}</h2>
             <p className={Description}>{description}</p>
             <div className={Statistics}>
               {statistics.map((statistic, index) => (
@@ -59,7 +59,7 @@ const TwoColSignleFeatureWithStats = ({
         </div>
       </div>
       <ThreeColSimpleWithImage data={posts} />
-    </Container>
+    </div>
   );
 };
 

@@ -14,11 +14,10 @@ import SvgDecoratorBlob3 from "images/svg-decorator-blob-3.svg";
 import { IThreeColSimple } from "types";
 import Link from "next/link";
 import Image from "next/legacy/image";
-import tw from 'twin.macro'
 
-const Subheading = tw(CSubheading)`text-center mb-3`;
-const Description = tw(SectionDescription)`text-center mx-auto`;
-const Heading = tw(SectionHeading)``
+const Subheading = `${CSubheading} text-center mb-3`;
+const Description = `${SectionDescription} text-center mx-auto`;
+const Heading = SectionHeading;
 const ThreeColumnContainer = `mt-10 flex flex-col items-center lg:items-stretch lg:flex-row flex-wrap lg:justify-center max-w-screen-lg mx-auto`;
 const Column = `lg:w-1/3 max-w-xs`;
 const Card = `flex flex-col items-center text-center h-full mx-4 px-4 py-8 rounded transition-transform duration-300 hover:cursor-pointer transform hover:scale-105 `;
@@ -51,17 +50,11 @@ const ThreeColSimple = ({
   description = "",
 }: IThreeColSimple) => {
   return (
-    <Container>
-      <ContentWithPaddingXl>
-        {subheading && (
-          <Subheading>{subheading}</Subheading>
-        )}
-        {heading && <Heading>{heading}</Heading>}
-        {description && (
-          <Description>
-            {description}
-          </Description>
-        )}
+    <div className={Container}>
+      <div className={ContentWithPaddingXl}>
+        {subheading && <div className={Subheading}>{subheading}</div>}
+        {heading && <div className={Heading}>{heading}</div>}
+        {description && <div className={Description}>{description}</div>}
         <div className={ThreeColumnContainer}>
           {cards.map((card, i) => (
             <div className={Column} key={i}>
@@ -87,9 +80,9 @@ const ThreeColSimple = ({
             </div>
           ))}
         </div>
-      </ContentWithPaddingXl>
+      </div>
       <SvgDecoratorBlob3 className="pointer-events-none absolute right-0 bottom-0 w-64 opacity-25 transform translate-x-32 translate-y-40" />
-    </Container>
+    </div>
   );
 };
 

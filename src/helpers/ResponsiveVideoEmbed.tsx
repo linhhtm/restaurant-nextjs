@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Spinner } from "components";
+import React from "react";
+// import { Spinner } from "components";
 import { IResponsiveVideoEmbed } from "types";
 
 const ResponsiveVideoEmbed = ({
@@ -7,14 +7,14 @@ const ResponsiveVideoEmbed = ({
   background = "black",
   className = "video",
 }: IResponsiveVideoEmbed) => {
-  const [loading, setLoading] = useState(true);
-  function onLoad() {
-    setLoading(false);
-  }
+  // const [loading, setLoading] = useState(true);
+  // function onLoad() {
+  //   setLoading(false);
+  // }
 
   return (
     <>
-      {loading && <Spinner />}
+      {/* {loading && <Spinner />} */}
       <div
         className={className}
         style={{
@@ -25,7 +25,7 @@ const ResponsiveVideoEmbed = ({
         }}
       >
         <iframe
-          onLoad={onLoad}
+          // onLoad={onLoad}
           title="Embeded Video"
           style={{
             position: "absolute",

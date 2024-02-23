@@ -1,5 +1,6 @@
+"use client";
 import "slick-carousel/slick/slick.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import Slider from "react-slick";
 import { Container, ContentWithPaddingXl, SectionHeading } from "components";
 import StarIconBase from "images/star-icon.svg";
@@ -12,7 +13,7 @@ const Row = `flex flex-col md:flex-row justify-between items-center`;
 const Column = `w-full max-w-md mx-auto md:max-w-none md:mx-0`;
 const ImageColumn = `md:w-5/12 xl:w-6/12 flex-shrink-0 relative`;
 const TextColumn = `md:w-7/12 xl:w-6/12 mt-16 md:mt-0`;
-const Heading = `mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
+const Heading = `${SectionHeading} mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = `mt-6 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`;
 
 const TestimonialSlider = `w-full mt-10 text-center md:text-left`;
@@ -68,12 +69,12 @@ const TwoColumnWithImageAndRating = ({
   const [sliderRef, setSliderRef] = useState<any>(null);
 
   return (
-    <Container>
-      <ContentWithPaddingXl>
+    <div className={Container}>
+      <div className={ContentWithPaddingXl}>
         <div className={Row}>
           <div className={`${Column} ${ImageColumn}`}>
             <Image
-              layout="responsive"
+              // layout="responsive"
               alt=""
               width={0}
               height={0}
@@ -95,7 +96,7 @@ const TwoColumnWithImageAndRating = ({
               "md:pl-12 lg:pl-16 md:order-last": !textOnLeft,
             })}
           >
-            <SectionHeading className={Heading}>{heading}</SectionHeading>
+            <div className={Heading}>{heading}</div>
             <p className={Description}>{description}</p>
             <Slider
               className={TestimonialSlider}
@@ -137,8 +138,8 @@ const TwoColumnWithImageAndRating = ({
             </Slider>
           </div>
         </div>
-      </ContentWithPaddingXl>
-    </Container>
+      </div>
+    </div>
   );
 };
 

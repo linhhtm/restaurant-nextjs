@@ -8,7 +8,7 @@ import Image from "next/legacy/image";
 
 const Content = `max-w-screen-xl mx-auto py-20 lg:py-24`;
 const ThreeColumn = `flex flex-col items-center lg:items-stretch lg:flex-row flex-wrap`;
-const Column = `mt-24 lg:w-1/3`;
+const Column = `column mt-24 lg:w-1/3`;
 
 const HeadingInfoContainer = `flex flex-col items-center`;
 const HeadingDescription = `mt-4 font-medium text-gray-600 text-center max-w-sm`;
@@ -18,12 +18,14 @@ const Category = `mt-4 text-secondary-100 font-bold text-sm`;
 const Title = `mt-2 leading-relaxed font-bold text-lg`;
 const Link = `inline-block mt-2 text-sm text-primary-500 font-bold cursor-pointer transition duration-300 border-b-2 border-transparent hover:border-primary-500`;
 
+
 const ThreeColSimpleWithImage = ({ data }: any) => {
+
   return (
-    <Container>
+    <div className={Container}>
       <div className={Content}>
         <div className={HeadingInfoContainer}>
-          <HeadingTitle>Popular Blog Posts</HeadingTitle>
+          <h2 className={HeadingTitle}>Popular Blog Posts</h2>
           <p className={HeadingDescription}>
             Some amazing blog posts that are written by even more amazing
             people.
@@ -34,7 +36,7 @@ const ThreeColSimpleWithImage = ({ data }: any) => {
             <div className={Column} key={index}>
               <div className={Card}>
                 <div className="relative bg-cover bg-center h-80 lg:h-64 rounded">
-                  <Image alt="" layout="fill" src={post.imageSrc} />
+                  <Image alt="" layout="fill"  src={post.imageSrc} />
                 </div>
                 <div className={Category}>{post.category}</div>
                 <div className={Title}>{post.title}</div>
@@ -48,7 +50,7 @@ const ThreeColSimpleWithImage = ({ data }: any) => {
       </div>
       <SvgDecoratorBlob1 className="-z-10 absolute bottom-0 right-0 w-48 h-48 transform translate-x-40 -translate-y-8 opacity-25" />
       <SvgDecoratorBlob2 className="-z-10 absolute top-0 left-0 w-48 h-48 transform -translate-x-32 translate-y-full opacity-25" />
-    </Container>
+    </div>
   );
 };
 

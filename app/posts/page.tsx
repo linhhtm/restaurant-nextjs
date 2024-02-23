@@ -1,17 +1,15 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Container,
   ContentWithPaddingXl,
   SectionHeading,
-  PrimaryButton,
+  // PrimaryButton,
 } from "components";
 import { IPost } from "types";
 import Link from "next/link";
 import clsx from "clsx";
 import { default as NextImage } from "next/image";
 import API from "service";
-// import tw from "twin.macro"
 
 const HeadingRow = `flex`;
 const Heading = `text-gray-900`;
@@ -40,44 +38,41 @@ const CreationDate = `mt-4 uppercase text-gray-600 italic font-semibold text-xs`
 const Title = `mt-1 font-black text-2xl text-gray-900 group-hover:text-primary-500 transition duration-300`;
 const Description = ``;
 
-const ButtonContainer = `flex justify-center`;
-const LoadMoreButton = `mt-16 mx-auto`;
+// const ButtonContainer = `flex justify-center`;
+// const LoadMoreButton = `mt-16 mx-auto`;
 
-interface IPostList {
-  data: IPost[];
-  page: number;
-  lastPage: number;
-}
-const PostList = ({ headingText = "Blog Posts" }: any) => {
-  const [data, setData] = useState<IPostList>({
-    data: [],
-    page: 0,
-    lastPage: 0,
-  });
-  const onLoadMoreClick = () => {
-    fetchBlogList(data.page + 1);
-  };
+// interface IPostList {
+//   data: IPost[];
+//   page: number;
+//   lastPage: number;
+// }
 
-  const fetchBlogList = async (page: number) => {
-    const res = await API.getBlogList({ page });
-    setData({
-      data: [...data.data, ...(res.data || [])],
-      page,
-      lastPage: res.lastPage,
-    });
-  };
+const PostList = async ({ headingText = "Blog Posts" }: any) => {
+  const data = await API.getBlogList();
+  // const onLoadMoreClick = () => {
+  //   fetchBlogList(data.page + 1);
+  // };
 
-  useEffect(() => {
-    (async () => {
-      await fetchBlogList(data.page);
-    })();
-  }, []);
+  // const fetchBlogList = async (page: number) => {
+  //   const res = await API.getBlogList({ page });
+  //   setData({
+  //     data: [...data.data, ...(res.data || [])],
+  //     page,
+  //     lastPage: res.lastPage,
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   (async () => {
+  //     await fetchBlogList(data.page);
+  //   })();
+  // }, []);
 
   return (
-    <Container>
-      <ContentWithPaddingXl>
+    <div className={Container}>
+      <div className={ContentWithPaddingXl}>
         <div className={HeadingRow}>
-          <SectionHeading className={Heading}>{headingText}</SectionHeading>
+          <div className={`${Heading} ${SectionHeading}`}>{headingText}</div>
         </div>
         <div className={Posts}>
           {data.data?.map((post: IPost, index: number) => (
@@ -94,7 +89,6 @@ const PostList = ({ headingText = "Blog Posts" }: any) => {
                   <div className={Image}>
                     <NextImage
                       alt={post.title}
-                      layout="fill"
                       sizes="md"
                       src={post.imageSrc}
                     />
@@ -112,15 +106,18 @@ const PostList = ({ headingText = "Blog Posts" }: any) => {
             </div>
           ))}
         </div>
-        {data.page < data.lastPage && (
+        {/* {data.page < data.lastPage && (
           <div className={ButtonContainer}>
-            <PrimaryButton className={LoadMoreButton} onClick={onLoadMoreClick}>
+            <button
+              className={`${LoadMoreButton} ${PrimaryButton}`}
+              onClick={onLoadMoreClick}
+            >
               Load More
-            </PrimaryButton>
+            </button>
           </div>
-        )}
-      </ContentWithPaddingXl>
-    </Container>
+        )} */}
+      </div>
+    </div>
   );
 };
 

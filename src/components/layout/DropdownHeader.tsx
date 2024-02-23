@@ -1,15 +1,16 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import clsx from "clsx";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 
 const DropdownHeader = () => {
   const [isHidden, setIsHidden] = useState(true);
   const refMenu = useRef<any>(null);
   const refButton = useRef<any>(null);
   const { user = {} } = useUser();
-  const router = useRouter()
+  // const router = useRouter()
 
   const onClickOutside = () => {
     setIsHidden(true);
@@ -93,8 +94,9 @@ const DropdownHeader = () => {
           </div>
         </div>
         <div className="py-1" role="none">
+          <Link
+          href={`/api/auth/logout`}>
           <div
-            onClick={() => router.push(`/api/auth/logout`)}
             className="cursor-pointer text-gray-700 block px-4 py-2 text-sm"
             role="menuitem"
             tabIndex={-1}
@@ -102,6 +104,7 @@ const DropdownHeader = () => {
           >
             Sign out
           </div>
+          </Link>
         </div>
       </div>
     </div>
