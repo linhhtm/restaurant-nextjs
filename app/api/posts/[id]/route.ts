@@ -13,7 +13,7 @@ export async function GET(req: Request) {
           message: `Blog with id: ${id} not found11.`,
         },
         {
-          status: 4011,
+          status: 40222,
         }
       );
 }
