@@ -20,7 +20,6 @@ describe("Page", () => {
   it("renders ingredients", async () => {
     const page = await render(<Page data={data} />);
     const { container } = page;
-    console.debug(prettyDOM(container.firstChild as Element));
     const ingredient = container.getElementsByClassName("ingredient");
     expect(ingredient.length).toBe(2);
   });
