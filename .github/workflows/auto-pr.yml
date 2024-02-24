@@ -7,7 +7,6 @@ on:
 
 jobs:
   test:
-    name: Test application
     runs-on: ubuntu-latest
     steps:
       - name: Sync branches
