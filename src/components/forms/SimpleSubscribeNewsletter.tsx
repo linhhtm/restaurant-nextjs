@@ -27,15 +27,13 @@ const SimpleSubscribeNewsletter = ({
   subscribe: (data: NewsletterSchemaType) => any;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [formValidation, setFormValidation] =
-    useState<Partial<ZodError>>({});
+  const [formValidation, setFormValidation] = useState<Partial<ZodError>>({});
   const onSubscribe = async () => {
-    // e.preventDefault();
     const res = await subscribe({
       newsletter: inputRef.current?.value || "",
     });
     console.log("formData", res);
-    setFormValidation(res);
+    setFormValidation(res || {});
   };
   return (
     <div className={Container}>
@@ -51,7 +49,7 @@ const SimpleSubscribeNewsletter = ({
             </div>
           </div>
           <div className={FormColumn}>
-            <form className={Form} action={onSubscribe}>
+            <form className={Form}>
               <input
                 className={Input}
                 name="newsletter"
@@ -63,10 +61,10 @@ const SimpleSubscribeNewsletter = ({
               {formValidation.issues?.[0]?.message}
               <button
                 className={Button}
-                // onClick={(e) => {
-                //   onSubscribe(e);
-                // }}
-                // type="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSubscribe();
+                }}
               >
                 Subscribe Now
               </button>
