@@ -1,0 +1,19 @@
+name: Auto Pull Request - Test-1 to Main
+
+on:
+  push:
+    branches: [test-1]
+  workflow_call:
+
+jobs:
+  test:
+    name: Test application
+    runs-on: ubuntu-latest
+    steps:
+      - name: "☁️ checkout repository"
+        uses: TreTuna/sync-branches@1.4.0
+        with: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FROM_BRANCH: test-1
+          TO_BRANCH: main
+          PULL_REQUEST_TITLE: "[Auto Create PR] Merge from test-1 to main"
