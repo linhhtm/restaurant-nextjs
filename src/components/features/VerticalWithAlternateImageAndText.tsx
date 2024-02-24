@@ -17,7 +17,6 @@ const Subtitle = `flex items-center text-gray-900 tracking-wide`;
 
 const VerticalWithAlternateImageAndText = ({ data = {}, posts }: any) => {
   const { strMeal, strInstructions, strMealThumb } = data;
-
   const ingredients = useMemo(() => {
     const arr: IIngredient[] = [];
 
