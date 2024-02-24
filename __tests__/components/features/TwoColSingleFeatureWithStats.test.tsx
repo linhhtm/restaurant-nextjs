@@ -47,6 +47,5 @@ describe("Page", () => {
     expect(container.getElementsByClassName("statistic").length).toBe(
       statistics.length
     );
-
   });
 });
