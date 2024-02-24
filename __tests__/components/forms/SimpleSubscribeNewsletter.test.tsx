@@ -11,7 +11,7 @@ describe("Page", () => {
       value: 'linh@gmail.com'
     })
 
-    const button = screen.getByRole("button", { name: /Subscribe Now/i });
+    const button = screen.getByRole("button", { name: /Subscribe Now 2/i });
     expect(button).toBeInTheDocument();
     fireEvent.click(button)
     expect(subscribe).toHaveBeenCalledTimes(1)
