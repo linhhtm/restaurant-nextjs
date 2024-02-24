@@ -1,4 +1,4 @@
-name: Auto Pull Request - Test-1 to Main
+name: Auto Pull Request - test-1 to main
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  auto-create-pr:
+  auto-create-pull-request:
     runs-on: ubuntu-latest
     steps:
       - name: Sync branches
@@ -15,4 +15,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_BRANCH: test-1
           TO_BRANCH: main
-          PULL_REQUEST_TITLE: "[Auto Create PR] Merge from test-1 to main"
+          PULL_REQUEST_TITLE: "[Auto Create PR] Merge from test-1 To main"
