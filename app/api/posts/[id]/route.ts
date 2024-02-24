@@ -10,7 +10,7 @@ export async function GET(req: Request) {
     ? NextResponse.json(filtered[0])
     : NextResponse.json(
         {
-          message: `11 with id: ${id}.`,
+          message: `11 2with id: ${id}.`,
         },
         {
           status: 121,
