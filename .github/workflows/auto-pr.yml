@@ -10,7 +10,7 @@ jobs:
     name: Test application
     runs-on: ubuntu-latest
     steps:
-      - name: "☁️ checkout repository"
+      - name: Sync branches
         uses: TreTuna/sync-branches@1.4.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
