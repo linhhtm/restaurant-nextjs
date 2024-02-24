@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: "☁️ checkout repository"
         uses: TreTuna/sync-branches@1.4.0
-        with: 
+        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_BRANCH: test-1
           TO_BRANCH: main
