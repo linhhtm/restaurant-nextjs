@@ -17,7 +17,6 @@ const Subtitle = `flex items-center text-gray-900 tracking-wide`;
 
 const VerticalWithAlternateImageAndText = ({ data = {}, posts }: any) => {
   const { strMeal, strInstructions, strMealThumb } = data;
-
   const ingredients = useMemo(() => {
     const arr: IIngredient[] = [];
     for (let i = 1; i <= 20; i++) {
@@ -43,11 +42,7 @@ const VerticalWithAlternateImageAndText = ({ data = {}, posts }: any) => {
         <div className={Card}>
           <div className="relative rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8">
             {strMealThumb && (
-              <Image
-                objectFit="cover"
-                src={strMealThumb}
-                alt=""
-              />
+              <Image objectFit="cover" src={strMealThumb} alt="" />
             )}
           </div>
         </div>
