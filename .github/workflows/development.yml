@@ -2,8 +2,10 @@ name: Development
 
 on:
   pull_request:
+    types:
+      - opened
     branchs: 
-      - develop
+      - main
   workflow_call:
 
 jobs:
