@@ -3,10 +3,10 @@ name: Auto Pull Request - Test-1 to Main
 on:
   push:
     branches: [test-1]
-  workflow_call:
+  workflow_dispatch:
 
 jobs:
-  test:
+  auto-create-pr:
     runs-on: ubuntu-latest
     steps:
       - name: Sync branches
