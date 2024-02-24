@@ -11,9 +11,6 @@
     "test": "jest",
     "test-coverage": "jest --coverage"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.2.0",
     "@emotion/styled": "^11.11.0",
