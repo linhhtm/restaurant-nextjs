@@ -1,42 +1,52 @@
 name: Development
-cache:
-  paths:
-    - node_modules/
-    - coverage/
-
-stages:
-  - install_n_build
-  - tests
-  - code-quality
 
 on:
   pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
-      - reopened
+    branchs: 
+      - develop
   workflow_call:
 
-install:
-  stage: install_n_build
-  script:
-    - npm i
+jobs:
+  pull-request-to-develop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: "☁️ checkout repository"
+        uses: actions/checkout@v2
 
+      - name: "🔧 setup node"
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
 
-unit-test:
-  stage: tests
-  script:
-    - npm run test
-  allow_failure: true
+      - name: "🔧 install npm@latest"
+        run: npm i -g npm@latest
 
-sonarqube-check:
-  stage: code-quality
-  script:
-    - npm run run lint
-  when: on_success
-  only:
-    - merge_requests
-    - master
-    - main
-    - develop
+      - name: "📦 install dependencies"
+        uses: bahmutov/npm-install@v1
+
+      - name: "🔍 run tests"
+        run: npm run test --if-present
+
+  lint:
+    name: Code standards
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: "☁️ checkout repository"
+        uses: actions/checkout@v3
+
+      - name: "🔧 setup node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: "📦 install dependencies"
+        run: npm i
+
+      - name: "Unit test"
+        run:
+          npm run test-coverage
+
+      - name: "🔍 lint code"
+        run: npm run lint --if-present
