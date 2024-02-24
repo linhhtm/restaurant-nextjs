@@ -13,7 +13,7 @@ export async function GET(req: Request) {
           message: `112 2with id: ${id}.`,
         },
         {
-          status: 112,
+          status: 1122,
         }
       );
 }
