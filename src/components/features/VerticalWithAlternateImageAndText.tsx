@@ -19,6 +19,7 @@ const VerticalWithAlternateImageAndText = ({ data = {}, posts }: any) => {
   const { strMeal, strInstructions, strMealThumb } = data;
   const ingredients = useMemo(() => {
     const arr: IIngredient[] = [];
+
     for (let i = 1; i <= 20; i++) {
       const title = data[`strIngredient${i}`];
       if (title) {
